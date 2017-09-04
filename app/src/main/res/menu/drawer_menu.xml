@@ -1,0 +1,34 @@
+﻿<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:id="@+id/menu_top" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/nav_first_fragment"
+        android:icon="@drawable/ukmenu"
+        android:title="@string/uk_frag" />
+  </group>
+
+  <group android:id="@+id/menu_two" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/nav_second_fragment"
+        android:icon="@drawable/overseasmenu"
+        android:title="@string/overseas_frag" />
+  </group>
+  <group android:id="@+id/menu_three" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/nav_third_fragment"
+        android:icon="@drawable/onlinemenu"
+        android:title="@string/online_frag" />
+  </group>
+  <group android:id="@+id/menu_fourth" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/nav_fourth_fragment"
+        android:icon="@drawable/pickupsmenu"
+        android:title="@string/pickups_frag" />
+  </group>
+  <group android:id="@+id/menu_fifth" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/nav_fith_fragment"
+        android:icon="@drawable/profilemenu"
+        android:title="@string/profile_frag" />
+  </group>
+</menu>

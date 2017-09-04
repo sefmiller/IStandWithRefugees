@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/event_type_list"
+        android:layout_alignStart="@+id/event_type_list"
+        android:layout_below="@+id/event_type_list"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"
+        android:hint="Email Address" />
+    <Spinner
+        android:id="@+id/event_type_list"
+        android:entries="@array/event_arrays"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText5"
+        android:layout_marginLeft="@dimen/_10sdp" />
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Event Name *"
+        android:textSize="@dimen/_18ssp"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Address *"
+        android:textSize="@dimen/_10ssp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_above="@+id/button"
+        android:layout_marginLeft="@dimen/_217sdp" />
+    <ImageView
+        android:id="@+id/addeventmapimg"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_above="@+id/textView3"
+        android:layout_marginLeft="@dimen/_217sdp" />
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"
+        android:hint="Postcode *"
+        android:layout_below="@+id/editText9"
+        android:layout_alignLeft="@+id/editText9"
+        android:layout_alignStart="@+id/editText9" />
+    <EditText
+        android:id="@+id/editText9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"
+        android:layout_below="@+id/editText4"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:hint="Building Name/No *" />
+    <ImageView
+        android:id="@+id/editText4"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:text="Describe the Event*     "
+        android:layout_below="@+id/time"
+        android:layout_alignStart="@+id/event_type_list"
+        android:layout_alignLeft="@+id/event_type_list"
+        android:layout_marginTop="@dimen/_28sdp" />
+    <Button
+        android:id="@+id/button"
+        android:text="Add Event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/button_text"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/mainbutton" />
+    <Spinner
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/charity_linked_list"
+        android:entries="@array/charity_arrays"
+        android:layout_below="@+id/editText5"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3" />
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:hint="Website Address"
+        android:textSize="@dimen/_12ssp"
+        android:textAlignment="center"
+        android:layout_above="@+id/radioButton4"
+        android:layout_alignRight="@+id/radioButton"
+        android:layout_alignEnd="@+id/radioButton" />
+    <CheckBox
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly"
+        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/addeventmapimg"
+        android:layout_alignStart="@+id/addeventmapimg"
+        android:layout_marginTop="@dimen/_7sdp" />
+    <CheckBox
+        android:id="@+id/radioButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weekly"
+        android:layout_toRightOf="@+id/recurring_list"
+        android:layout_below="@+id/editText"
+        android:layout_marginTop="@dimen/_7sdp" />
+    <Spinner
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_below="@+id/editText"
+        android:id="@+id/recurring_list"
+        android:entries="@array/recurring_arrays"
+        android:layout_marginTop="@dimen/_7sdp" />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recurring_list"
+        android:layout_alignStart="@+id/recurring_list"
+        android:layout_below="@+id/recurring_list"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"
+        android:text="DD-MM-YYYY" />
+    <ImageView
+        android:id="@+id/button4"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignEnd="@+id/editText3"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_below="@+id/radioButton4"
+        android:layout_marginTop="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recurring_list"
+        android:layout_alignStart="@+id/recurring_list"
+        android:layout_below="@+id/date"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_12ssp"
+        android:text="HH:MM" />
+    <ImageView
+        android:id="@+id/button5"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignEnd="@+id/editText3"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="@dimen/_10sdp" />
+</RelativeLayout>

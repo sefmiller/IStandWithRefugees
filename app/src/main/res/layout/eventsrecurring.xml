@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/titleview">
+    <TextView
+        android:id="@+id/titlepickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Does the event occur regularly?"
+        android:textSize="@dimen/_18ssp"
+        android:textAlignment="center"
+        android:lines="2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_150sdp" />
+    <Spinner
+        android:id="@+id/edittitlepickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/recurring_arrays"
+        android:textSize="@dimen/_18ssp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/titlepickup"
+        android:layout_marginTop="@dimen/_40sdp" />
+    <CheckBox
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weekly"
+        android:layout_below="@+id/edittitlepickup"
+        android:layout_marginLeft="@dimen/_57sdp"
+        android:layout_marginTop="@dimen/_10sdp" />
+    <CheckBox
+        android:id="@+id/radioButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly"
+        android:layout_below="@+id/edittitlepickup"
+        android:layout_toRightOf="@+id/radioButton"
+        android:layout_marginLeft="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_10sdp" />
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_below="@+id/radioButton"
+        android:layout_marginLeft="@dimen/_35sdp" />
+    <ImageView
+        android:id="@+id/forward"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_35sdp" />
+</RelativeLayout>
