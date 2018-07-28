@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -12,69 +14,69 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:layout_weight="2">
             <RelativeLayout
-                android:id="@+id/ukviews1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/botandright"
                 android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
+                >
                 <RelativeLayout
-                    android:id="@+id/ukview1"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="horizontal"
-                    android:background="@color/backgroundColor"
                     >
                     <ImageView
                         android:id="@+id/ukimg1"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true" />
                     <TextView
                         android:id="@+id/uktext1"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="Find Event/Charity"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/find_org"
                         android:gravity="center"
-                        android:textAppearance="@style/icons_text"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textColor="@android:color/white"
                         android:layout_below="@+id/ukimg1"
                         android:layout_alignLeft="@+id/ukimg1"
                         android:layout_alignStart="@+id/ukimg1" />
                 </RelativeLayout>
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/ukviews2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
+                >
                 <RelativeLayout
-                    android:id="@+id/ukview2"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:background="@drawable/bottomborder"
                     android:orientation="horizontal"
-                    android:background="@color/backgroundColor">
+                    >
                     <ImageView
-                        android:layout_marginTop="@dimen/_17sdp"
+                        android:layout_marginTop="@dimen/_35sdp"
                         android:id="@+id/ukimg2"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true" />
                     <TextView
                         android:id="@+id/uktext2"
-                        android:textAppearance="@style/icons_text"
-                        android:text="Add Event"
+                        android:text="@string/list_orgs"
                         android:gravity="center"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textColor="@android:color/white"
                         android:layout_below="@+id/ukimg2"
                         android:layout_alignLeft="@+id/ukimg2"
                         android:layout_alignStart="@+id/ukimg2" />
@@ -84,147 +86,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:layout_weight="2">
             <RelativeLayout
-                android:id="@+id/ukviews2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
+                >
                 <RelativeLayout
-                    android:id="@+id/ukview3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/bottomright"
                     android:orientation="horizontal"
-                    android:background="@color/backgroundColor">
+                    >
                     <ImageView
-                        android:layout_marginTop="@dimen/_17sdp"
+                        android:layout_marginTop="@dimen/_35sdp"
                         android:id="@+id/ukimg3"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                         />
+                        />
                     <TextView
                         android:id="@+id/uktext3"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="List Events"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_org"
                         android:gravity="center"
-                        android:textAppearance="@style/icons_text"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textColor="@android:color/white"
                         android:layout_below="@+id/ukimg3"
                         android:layout_alignLeft="@+id/ukimg3"
                         android:layout_alignStart="@+id/ukimg3" />
                 </RelativeLayout>
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/ukviews3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
+                >
                 <RelativeLayout
-                    android:id="@+id/ukview4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:background="@color/backgroundColor">
+                    >
                     <ImageView
-                        android:layout_marginTop="@dimen/_17sdp"
+                        android:layout_marginTop="@dimen/_35sdp"
                         android:id="@+id/ukimg4"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                         />
+                        />
                     <TextView
                         android:id="@+id/uktext4"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="Add Charity"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_fund"
                         android:gravity="center"
-                        android:textAppearance="@style/icons_text"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textColor="@android:color/white"
                         android:layout_below="@+id/ukimg4"
                         android:layout_alignLeft="@+id/ukimg4"
                         android:layout_alignStart="@+id/ukimg4" />
-                </RelativeLayout>
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/rvButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2">
-            <RelativeLayout
-                android:id="@+id/ukviews2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
-                <RelativeLayout
-                    android:id="@+id/ukview5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:background="@color/backgroundColor">
-                    <ImageView
-                        android:id="@+id/ukimg5"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                         />
-                    <TextView
-                        android:id="@+id/uktext5"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="List Charities"
-                        android:gravity="center"
-                        android:textAppearance="@style/icons_text"
-                        android:layout_below="@+id/ukimg5"
-                        android:layout_alignLeft="@+id/ukimg5"
-                        android:layout_alignStart="@+id/ukimg5" />
-                </RelativeLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/ukviews2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="#E7E7E7"
-                android:padding="@dimen/_1sdp">
-                <RelativeLayout
-                    android:id="@+id/ukview6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:background="@color/backgroundColor">
-                    <ImageView
-                        android:id="@+id/ukimg6"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="@dimen/_17sdp"
-                        android:layout_centerHorizontal="true" />
-                    <TextView
-                        android:id="@+id/uktext6"
-
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="Favourites"
-                        android:gravity="center"
-                        android:textAppearance="@style/icons_text"
-                        android:layout_below="@+id/ukimg6"
-                        android:layout_alignLeft="@+id/ukimg6"
-                        android:layout_alignStart="@+id/ukimg6" />
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>

@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="backgroundColor">#DFFFE0</color>
-    <color name="toolbarColor"> #51B85C</color>
+    <color name="dialogColour">#7facf4</color>
+    <color name="toolbarColor"> #3F51B5</color>
+    <color name="secondaryColor"> #c3c113</color>
+
 </resources>

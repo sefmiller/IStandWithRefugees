@@ -3,24 +3,28 @@
     android:id="@+id/contents_frame"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingLeft="@dimen/_24sdp"
-    android:paddingRight="@dimen/_24sdp"
+
     >
     <ImageView
-        android:layout_width="@dimen/_175sdp"
-        android:layout_height="@dimen/_175sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_250sdp"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_45sdp"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:src="@drawable/logo"
         android:layout_below="@+id/textviewsplash"
-        android:id="@+id/imageView1" />
+        android:id="@+id/imageView1"
+        android:paddingLeft="@dimen/_24sdp"
+        android:paddingRight="@dimen/_24sdp"/>
     <TextView
         android:id="@+id/textviewsplash"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_30sdp"
         android:textSize="@dimen/_25ssp"
-        android:textColor="#ffffff"
+        android:textColor="@color/secondaryColor"
         android:layout_alignParentTop="true"
+        android:paddingLeft="@dimen/_24sdp"
+        android:paddingRight="@dimen/_24sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I Stand With Refugees" />
@@ -29,12 +33,16 @@
         android:layout_width="fill_parent"
         android:gravity="center"
         android:layout_below="@id/imageView1">
-        <Button
-            android:background="@drawable/mainbutton"
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  Get Started  "
-            style="@style/button_text" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/_18ssp"
+        android:background="@color/toolbarColor"
+        android:textColor="@android:color/white"
+        android:text="Login" />
 </RelativeLayout>

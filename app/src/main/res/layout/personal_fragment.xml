@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="@dimen/_16sdp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bottomborder">
+
+            <TextView
+                android:id="@+id/contributions_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:text="@string/contributions"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/_18ssp"
+                android:layout_below="@+id/contributions_image"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp" />
+
+
+            <ImageView
+                android:id="@+id/contributions_image"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:id="@+id/bookmarks_image"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/bookmarks_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/_18ssp"
+                android:lines="1"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textColor="#ffffff"
+                android:gravity="center_vertical"
+                android:text="@string/bookmarks"
+                android:layout_below="@+id/bookmarks_image"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

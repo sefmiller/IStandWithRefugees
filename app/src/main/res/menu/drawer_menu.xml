@@ -1,34 +1,103 @@
-﻿<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <group android:id="@+id/menu_top" android:checkableBehavior="single" >
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
     <item
-        android:id="@+id/nav_first_fragment"
-        android:icon="@drawable/ukmenu"
-        android:title="@string/uk_frag" />
-  </group>
-
-  <group android:id="@+id/menu_two" android:checkableBehavior="single" >
+        android:id="@+id/item_home"
+        android:checked="true"
+        android:icon="@drawable/home"
+        android:title="@string/home" />
     <item
-        android:id="@+id/nav_second_fragment"
-        android:icon="@drawable/overseasmenu"
-        android:title="@string/overseas_frag" />
-  </group>
-  <group android:id="@+id/menu_three" android:checkableBehavior="single" >
+        android:title="@string/action_uk">
+      <menu>
+        <group android:checkableBehavior="single">
+          <item
+              android:id="@+id/item_find_uk"
+              android:icon="@drawable/search"
+              android:title="@string/find_org_menu"
+              />
+          <item
+              android:id="@+id/item_list_uk"
+              android:icon="@drawable/list_menu"
+              android:title="@string/list_org_menu"
+              />
+          <item
+              android:id="@+id/item_add_uk"
+              android:icon="@drawable/add_org_menu"
+              android:title="@string/add_org"
+              />
+          <item
+              android:id="@+id/item_add_fund_uk"
+              android:icon="@drawable/fundraiser_menu"
+              android:title="@string/add_fund"
+              />
+        </group>
+      </menu >
+    </item>
     <item
-        android:id="@+id/nav_third_fragment"
-        android:icon="@drawable/onlinemenu"
-        android:title="@string/online_frag" />
-  </group>
-  <group android:id="@+id/menu_fourth" android:checkableBehavior="single" >
+        android:title="@string/action_overseas">
+      <menu>
+        <group android:checkableBehavior="single">
+          <item
+              android:id="@+id/item_find_overseas"
+              android:icon="@drawable/search"
+              android:title="@string/find_overseas_menu"
+              />
+          <item
+              android:id="@+id/item_list_overseas"
+              android:icon="@drawable/list_menu"
+              android:title="@string/list_overseas_menu"
+              />
+          <item
+              android:id="@+id/item_add_overseas"
+              android:icon="@drawable/add_org_menu"
+              android:title="@string/add_overseas_menu"
+              />
+          <item
+              android:id="@+id/item_other_resources"
+              android:icon="@drawable/resources_menu"
+              android:title="@string/other_resources"
+              />
+        </group>
+      </menu >
+    </item>
     <item
-        android:id="@+id/nav_fourth_fragment"
-        android:icon="@drawable/pickupsmenu"
-        android:title="@string/pickups_frag" />
-  </group>
-  <group android:id="@+id/menu_fifth" android:checkableBehavior="single" >
+        android:title="@string/action_online">
+      <menu>
+        <group android:checkableBehavior="single">
+          <item
+              android:id="@+id/item_list_online"
+              android:icon="@drawable/list_menu"
+              android:title="@string/action_online"
+              />
+          <item
+              android:id="@+id/add_online_item"
+              android:icon="@drawable/add_org_menu"
+              android:title="@string/add_online"
+              />
+        </group>
+      </menu >
+    </item>
     <item
-        android:id="@+id/nav_fith_fragment"
-        android:icon="@drawable/profilemenu"
-        android:title="@string/profile_frag" />
+        android:title="@string/personal">
+    <menu>
+      <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/cont_item"
+            android:icon="@drawable/contributions"
+            android:title="@string/contributions"
+            />
+        <item
+            android:id="@+id/bookmark_item"
+            android:icon="@drawable/add_org_menu"
+            android:title="@string/bookmarks"
+            />
+        <item
+            android:id="@+id/logout_item"
+            android:icon="@drawable/logout"
+            android:title="@string/logout"
+            />
+      </group>
+    </menu >
+  </item>
   </group>
 </menu>

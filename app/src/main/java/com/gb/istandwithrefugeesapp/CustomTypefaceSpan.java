@@ -5,6 +5,9 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.TypefaceSpan;
 
+/**
+ * class used to set font and style of menu items in nav drawer
+ */
 public class CustomTypefaceSpan extends TypefaceSpan {
 
     private final Typeface newType;

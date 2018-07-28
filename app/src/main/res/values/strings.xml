@@ -14,58 +14,69 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
+
 <resources>
-      <string name="uk_frag"> "Action In The UK"</string>
-      <string name="overseas_frag"> "Action Overseas"</string>
-      <string name="online_frag"> "Action Online"</string>
-      <string name="profile_frag"> "Profile"</string>
-      <string name="pickups_frag"> "Aid Pickups"</string>
+    <string name="online_frag"> "Action Online"</string>
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyB5Cp3Yw78nxc71FrASNJP_dI3qpar1ES8
     </string>
-    <string name="action_settings">Web search</string>
     <string name="title_activity_maps">Charities Map</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
-    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device.
+    </string>    <string name="app_name">istandwithrefugees</string>
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+    <string name="FACEBOOK_APP_ID">175405189772838</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">ce5c8ee1973bf4bd102e9229f638683b</string>
 
-  <string name="event_prompt">Event Type</string>
+    <string name="edittext_hint"></string>
+    <string-array name="area_array">
+        <item>Scotland</item>
+        <item>North East</item>
+        <item>North West</item>
+        <item>Yorkshire and the Humber</item>
+        <item>East Midlands</item>
+        <item>West Midlands</item>
+        <item>East Anglia</item>
+        <item>Greater London</item>
+        <item>South East</item>
+        <item>South West</item>
+        <item>Wales</item>
+        <item>Northern Ireland</item>
+        <item>Republic of Ireland</item>
 
-  <string-array name="event_arrays">
-    <item>Event Type *</item>
-    <item>Protest</item>
-    <item>Art</item>
-    <item>Aid Collection</item>
-    <item>Social</item>
-    <item>Other</item>
-  </string-array>
+    </string-array>
 
-    <string name="recurring_prompt">Recurring?</string>
+    <string name="home">Home</string>
+    <string name="find_overseas">Locate Action Overseas</string>
+    <string name="list_overseas_menu">List Action Overseas</string>
+    <string name="find_overseas_menu">Find Action Overseas</string>
+    <string name="list_overseas">List Action Overseas</string>
+    <string name="add_overseas_menu">Add Org Overseas</string>
+    <string name="other_resources">Other Resources</string>
+    <string name="action_uk">Action in the UK</string>
+    <string name="action_overseas">Action Overseas</string>
+    <string name="action_online">Online Action</string>
+    <string name="personal">Personal</string>
+    <string name="find_org"><![CDATA[Locate Action in the Uk ]]></string>
+    <string name="list_orgs"><![CDATA[List Action in the Uk]]></string>
+    <string name="find_org_menu"><![CDATA[Locate Action in the Uk]]></string>
+    <string name="list_org_menu"><![CDATA[List Action in the Uk]]></string>
+    <string name="add_org">Add Organisation</string>
+    <string name="add_fund">Add Fundraiser</string>
+    <string name="add_online">Add Online Action</string>
+    <string name="contributions">Manage Contributions</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="area">Area</string>
+    <string name="logout">Logout</string>
+    <string name="permissions_write_external_title">Write to disk</string>
+    <string name="permissions_write_external_message">Grant permission to write to external storage</string>
+    <string name="details">Details</string>
 
-    <string-array name="recurring_arrays">
-      <item>Recurring? *</item>
-      <item>Yes</item>
-      <item>No</item>
-      </string-array>
-
-  <string name="charity_prompt">Charity</string>
-  <string-array name="charity_arrays">
-    <item>For Charity *</item>
-    <item>Care4Calais</item>
-    <item>Help4Refugees</item>
-    <item>Calaid</item>
-    <item>Lighthouse Relief</item>
-    <item>Other</item>
-  </string-array>
-
-  <string-array name="country_arrays">
-    <item>Country *</item>
-    <item>France</item>
-    <item>Greece</item>
-    <item>Serbia</item>
-    <item>Italy</item>
-    <item></item>
-  </string-array>
 </resources>

@@ -1,59 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="button_text" >
-    <item name="android:layout_width" >fill_parent</item>
-    <item name="android:layout_height" >wrap_content</item>
-    <item name="android:textColor" >#ffffff</item>
-    <item name="android:gravity" >center</item>
-    <item name="android:textSize" >@dimen/_20ssp</item>
-    <item name="android:textStyle" >bold</item>
-    <item name="android:shadowColor" >#000000</item>
-    <item name="android:shadowDx" >1</item>
-    <item name="android:shadowDy" >1</item>
-    <item name="android:shadowRadius" >2</item>
-  </style>
-  <style name="icons_text" >
-    <item name="android:textSize" >@dimen/_13ssp</item>
-    <item name="android:textStyle" >bold</item>
-  </style>
-  <style name="splashscreen_text" >
-    <item name="android:textSize" >@dimen/_20ssp</item>
-    <item name="android:textColor" >#ffffff</item>
-    <item name="android:textStyle" >bold</item>
+    <style name="CustomShowcaseTheme2" parent="ShowcaseView">
+    <item name="sv_backgroundColor">#CC25467A</item>
+    <item name="sv_buttonText">Go</item>
+    <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
+    <item name="sv_detailTextAppearance">@style/CustomText2</item>
   </style>
 
-  <!-- Base application theme. -->
+  <style name="CustomTitle2" parent="TextAppearance.ShowcaseView.Title.Light">
+    <item name="android:textColor">#C20144</item>
+      <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="CustomText2" parent="TextAppearance.ShowcaseView.Detail.Light">
+    <item name="android:textColor">@color/secondaryColor</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+    <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">#2B7832</item>
-    <item name="colorPrimaryDark">@color/toolbarColor</item>
-    <item name="colorAccent">#E3FFDF</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:editTextColor">@android:color/white</item>
+    <item name="android:textColorHint">@android:color/white</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+  </style>
+  <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+    <item name="spinBars">true</item>
+    <item name="color">@android:color/white</item>
   </style>
 
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="colorPrimary">@color/toolbarColor</item>
-    <item name="android:background">@color/toolbarColor</item>
-
+    <style name="yourCustomStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">@color/toolbarColor</item>
+    <item name="android:textColorPrimaryInverse">@color/secondaryColor</item>
+    .. other
   </style>
-
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-
-  <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-  <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
   <style name="AppTheme.NoActionBar.NavigationView" >
     <item name="android:listDivider">@color/toolbarColor</item>
     <item name="android:textColor">@color/colorAccent</item>
-    <item name="android:textColorSecondary">@color/toolbarColor</item>
+    <item name="android:textColorSecondary">@color/secondaryColor</item>
     <item name="android:text">@color/toolbarColor</item>
-
+    <item name="android:ellipsize">end</item>
+    <item name="android:scrollbarSize">50dip</item>
+    <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
   </style>
 </resources>
