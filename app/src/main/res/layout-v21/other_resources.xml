@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        >
+
+        <RelativeLayout
+            android:id="@+id/refugee_resource_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/bottomborder">
+
+            <TextView
+                android:id="@+id/refugee_resource_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Refugee Aid Resource Locations"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryColor"
+                android:textSize="@dimen/_18ssp"
+                 />
+
+            <TextView
+                android:id="@+id/refugee_resource_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_20sdp"
+                android:text="Locations of warehouses, refugee aid groups and related organisations. Contact individual groups for full details of their activities."
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/refugee_resource_title"
+                 />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/_18ssp"
+                android:background="@color/toolbarColor"
+                android:textColor="@android:color/white"
+                android:text="Go" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/refugee_map_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_20sdp"
+                android:textColor="#ffffff"
+                android:paddingRight="@dimen/_20sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:text="An independent project mapping grassroot refugee activism across the world. A google map resource was used to map all of the grassroot organisations and  donation drop off points happening accross the world. Currrently activity is suspended on the project."
+                android:layout_below="@+id/refugee_map_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/refugee_map_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Refugee Map"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryColor"
+                android:textSize="@dimen/_18ssp"
+                />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/_18ssp"
+                android:background="@color/toolbarColor"
+                android:textColor="@android:color/white"
+                android:text="Go" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

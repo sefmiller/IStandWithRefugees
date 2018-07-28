@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <TextView
+        android:id="@+id/region_title"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/city_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="Region"
+        android:textColor="@color/secondaryColor"
+        android:textSize="@dimen/_16ssp" />
+
+    <LinearLayout
+        android:id="@+id/region_container"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignLeft="@+id/city_text"
+        android:background="#50D3D3D3"
+        android:layout_below="@+id/region_title"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/ref_name"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            android:lines="1"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/drop"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:padding="@dimen/_7sdp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/city_title"
+        android:layout_width="@dimen/_135sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_alignLeft="@id/address_text"
+        android:layout_below="@id/address_text"
+        android:text="City/Town/Village"
+        android:gravity="center"
+        android:textColor="@color/secondaryColor"
+        android:textSize="@dimen/_16ssp" />
+
+        <EditText
+            android:id="@+id/city_text"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/city_title"
+            android:layout_alignLeft="@id/city_title"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="#50D3D3D3"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:textColor="@android:color/white"
+            />
+
+    <TextView
+        android:id="@+id/address_title"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/street_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="Address Line 2"
+        android:textColor="@color/secondaryColor"
+        android:textSize="@dimen/_16ssp" />
+
+
+        <EditText
+            android:id="@+id/address_text"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/address_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:inputType="text"
+            android:background="#50D3D3D3"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            android:imeOptions="actionNext"
+            android:lines="1"
+            android:textColor="@android:color/white" />
+
+        <EditText
+            android:id="@+id/postcode_text"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/postcode_title"
+            android:layout_alignLeft="@id/postcode_title"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="#50D3D3D3"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/street_title"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/street_num_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="Street Name"
+        android:textColor="@color/secondaryColor"
+        android:textSize="@dimen/_16ssp" />
+
+        <EditText
+            android:id="@+id/street_text"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@android:color/white"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/street_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="#50D3D3D3"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:orientation="vertical"/>
+
+
+    <TextView
+        android:id="@+id/street_num_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/secondaryColor"
+        android:layout_alignParentTop="true"
+        android:layout_width="@dimen/_250sdp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Street Number or Building Name" />
+
+        <EditText
+            android:id="@+id/street_num_text"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#50D3D3D3"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/street_num_title"
+            android:layout_marginTop="@dimen/_5sdp"></EditText>
+
+     <TextView
+            android:id="@+id/postcode_title"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@color/secondaryColor"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_toRightOf="@id/city_title"
+
+            android:gravity="center"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/address_text"
+            android:text="Postcode" />
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Back"
+            android:layout_weight="1"
+            android:background="@drawable/border_right"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Submit"
+            android:layout_weight="1"
+            android:background="@color/toolbarColor"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

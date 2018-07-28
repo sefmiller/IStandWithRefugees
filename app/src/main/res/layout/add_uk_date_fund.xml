@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    >
+
+    <TextView
+        android:id="@+id/textviewtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_18ssp"
+        android:textColor="@color/secondaryColor"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="What date is the fundraiser?" />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#50D3D3D3"
+        android:id="@+id/date_container"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textviewtitle"
+        android:layout_marginTop="@dimen/_30sdp">
+        <TextView
+            android:id="@+id/title_date"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/_10sdp"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/time_img"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:tint="@color/secondaryColor"
+            android:layout_toRightOf="@+id/title_date"
+            android:padding="@dimen/_7sdp"
+            />
+
+    </RelativeLayout>
+        <TextView
+            android:id="@+id/textviewtime_ins"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:textSize="@dimen/_18ssp"
+            android:textColor="@color/secondaryColor"
+            android:padding="@dimen/_5sdp"
+            android:layout_width="@dimen/_250sdp"
+            android:gravity="center"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@+id/date_container"
+            android:text="What time is the fundraiser?" />
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="#50D3D3D3"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textviewtime_ins"
+            android:layout_marginTop="@dimen/_30sdp">
+            <TextView
+                android:id="@+id/title_time"
+                android:textColor="@android:color/white"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="@dimen/_220sdp"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:id="@+id/date_img"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:tint="@color/secondaryColor"
+                android:layout_toRightOf="@+id/title_time"
+                android:padding="@dimen/_5sdp"
+                />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Back"
+            android:layout_weight="1"
+            android:background="@drawable/border_right"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Next"
+            android:layout_weight="1"
+            android:background="@color/toolbarColor"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

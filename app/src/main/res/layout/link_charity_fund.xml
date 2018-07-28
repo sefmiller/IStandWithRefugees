@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    >
+
+    <TextView
+        android:id="@+id/textviewtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_18ssp"
+        android:textColor="@color/secondaryColor"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Pleae state which charity you are fundraising for?" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_below="@+id/textviewtitle"
+        android:layout_alignLeft="@+id/textviewtitle"
+        >
+        <TextView
+            android:id="@+id/ref_name"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Charity"
+            android:padding="@dimen/_6sdp"
+            android:elegantTextHeight="true"
+            android:background="@drawable/rounded_edit_text_seven"
+            android:textColor="@android:color/white"
+            />
+        <ImageView
+            android:id="@+id/drop"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:padding="@dimen/_7sdp"
+            android:background="@drawable/rounded_edit_text_eight"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Back"
+            android:layout_weight="1"
+            android:background="@drawable/border_right"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Next"
+            android:layout_weight="1"
+            android:background="@color/toolbarColor"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

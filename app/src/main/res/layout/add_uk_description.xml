@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents_frame"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    >
+
+    <TextView
+        android:id="@+id/textviewtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="@dimen/_25ssp"
+        android:textColor="@color/secondaryColor"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Please describe your fundraiser" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_10ssp"
+        android:gravity="right"
+        android:textStyle="bold"
+        android:id="@+id/char_limit_text"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_alignRight="@+id/text_desc_cont"
+        android:text="300 characters remaining"
+        android:layout_below="@+id/textviewtitle"
+        android:textColor="@android:color/holo_red_dark"/>
+    <RelativeLayout
+        android:id="@+id/text_desc_cont"
+        android:orientation="vertical"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:background="#50D3D3D3"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/char_limit_text"
+        >
+        <EditText
+            android:id="@+id/title_box"
+            android:lines="10"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/_10sdp"
+            android:focusable="true"
+            android:gravity="top"
+            android:maxLength="300"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Back"
+            android:layout_weight="1"
+            android:background="@drawable/border_right"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:textSize="@dimen/_18ssp"
+            android:text="Next"
+            android:layout_weight="1"
+            android:background="@color/toolbarColor"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>
