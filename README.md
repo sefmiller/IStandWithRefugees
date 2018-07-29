@@ -5,7 +5,7 @@
 ![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-00.png)![alt text]
 (https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-12.jpg)
 
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-32.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-06-13.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-07-07.jpg)![alt text](https://github.com/sefmiller/BedunFamily/blob/master/art/Screenshot_2018-04-30-22-08-11.png)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-32.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-06-13.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-07-07.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)
 
 
 The app can be used by a refugee to trace a family member missing along the refugee route, or by a certified aid worker, acting on their behalf.
