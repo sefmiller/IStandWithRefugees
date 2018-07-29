@@ -13,11 +13,11 @@ I Stand With Refugees was developed as a response to working in the Calais Jungl
 Organisations exist in the UK and overseas which provide a range of services for a refugee such as refugee led NGOs, translation, legal services, collecting & delivering aid, fundraising, family reunification, employment assistance, training, befriending and language learning, to name but a few. There has been a great deal of good will towards the plight of refugees fleeing persecution, poverty and terror and the application intends to give that good will, greater exposure. 
 
 Features
-*I Stand With Refugees provides an interactive map which allows users to quickly enter a postcode or their current location and discover what refugee related services are going on locally. 
-*For refugees and asylum seekers, it is a pit stop for securing assistance and a welcome on arrival. 
-*For those looking to volunteer, you'll find a plethora of opportunities to help out up and down the country and further afield, across Europe. 
-*The app allows user to add details of their organisations working in the UK and Europe or and online only aid, such as providing phone credit. 
-*Users can add fundraising events such as gigs, auctions, art shows or aid collections.
+* I Stand With Refugees provides an interactive map which allows users to quickly enter a postcode or their current location and discover what refugee related services are going on locally. 
+* For refugees and asylum seekers, it is a pit stop for securing assistance and a welcome on arrival. 
+* For those looking to volunteer, you'll find a plethora of opportunities to help out up and down the country and further afield, across Europe. 
+* The app allows user to add details of their organisations working in the UK and Europe or and online only aid, such as providing phone credit. 
+* Users can add fundraising events such as gigs, auctions, art shows or aid collections.
 * Bookmark an Organisation or Fundraiser to come back to later.
 
 ###  Dependencies 
