@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
 import com.gb.istandwithrefugeesapp.Model.Charity;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
 
@@ -30,6 +32,7 @@ class CustomInfoViewAdapter implements com.androidmapsextensions.GoogleMap.InfoW
     private final HashMap<String, String> markersMap;
     private final MainActivity mainActivity;
     private String logoUrl;
+    private String lastModified;
 
     public CustomInfoViewAdapter(LayoutInflater inflater, HashMap<String, String> markersMap, MainActivity mainActivity) {
         this.mInflater = inflater;
@@ -44,22 +47,26 @@ class CustomInfoViewAdapter implements com.androidmapsextensions.GoogleMap.InfoW
         int markId = Integer.valueOf(markerId);
         System.out.println(markId);
         HashMap currentMap = mainActivity.getDbHelper().getMarkersMap().get(markId);
+        Fundraiser fundraiser = null;
         if (currentMap.containsKey("Organisation")) {
             final Charity charity = (Charity) currentMap.get("Organisation");
             logoUrl = charity.getImageUrl();
-        }
-        else {
-            final Fundraiser fundraiser = (Fundraiser) currentMap.get("Fundraiser");
+            lastModified = charity.getLastModified();
+        } else {
+            fundraiser = (Fundraiser) currentMap.get("Fundraiser");
             logoUrl = fundraiser.getaCharity().getImageUrl();
+            lastModified = fundraiser.getaCharity().getLastModified();
         }
-            ((TextView) popup.findViewById(R.id.info_win_title)).setText(marker.getTitle());
+        ((TextView) popup.findViewById(R.id.info_win_title)).setText(marker.getTitle());
         Typeface titleFont = Typeface.
                 createFromAsset(mInflater.getContext().getAssets(), "fonts/Lobster_1.3.otf");
         ((TextView) popup.findViewById(R.id.info_win_title)).setTypeface(titleFont);
         ((TextView) popup.findViewById(R.id.info_win_desc)).setText(marker.getSnippet());
         CircleImageView circleImageView = popup.findViewById(R.id.nat_circle_image_view);
-        int dimen = (int)mainActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
-        Glide.with(mainActivity).load(logoUrl).listener(new RequestListener<Drawable>() {
+        int dimen = (int) mainActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
+        Glide.with(mainActivity).load(logoUrl).apply(new RequestOptions()
+                .signature(new ObjectKey(lastModified))
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).listener(new RequestListener<Drawable>() {
 
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -86,7 +93,9 @@ class CustomInfoViewAdapter implements com.androidmapsextensions.GoogleMap.InfoW
         ((TextView) popup.findViewById(R.id.info_win_title)).setText(marker.getTitle());
         ((TextView) popup.findViewById(R.id.info_win_desc)).setText(marker.getSnippet());
         CircleImageView circleImageView = popup.findViewById(R.id.nat_circle_image_view);
-        Glide.with(mainActivity).load(logoUrl).into(circleImageView);
+        Glide.with(mainActivity).load(logoUrl).apply(new RequestOptions()
+                .signature(new ObjectKey(lastModified))
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).into(circleImageView);
         return popup;
     }
 }

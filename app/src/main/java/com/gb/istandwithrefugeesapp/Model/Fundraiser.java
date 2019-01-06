@@ -28,8 +28,8 @@ public class Fundraiser extends UkMarker {
     }
 
     public Fundraiser(String title, String description, String website, String buildingNameOrStreetNo,
-                      String street, String otherAddress, String cityorTown, String postcode, String region, String date, String time, Charity aCharity, int markerId, int loginId) {
-        super(title, description, website, buildingNameOrStreetNo, street, otherAddress, cityorTown, postcode, region, markerId, loginId);
+                      String street, String otherAddress, String cityorTown, String postcode, String region, String typeOfAid, String lastModified, String date, String time, Charity aCharity, int markerId, int loginId) {
+        super(title, description, website, buildingNameOrStreetNo, street, otherAddress, cityorTown, postcode, region, typeOfAid, lastModified, markerId, loginId);
         this.date = date;
         this.time = time;
         this.aCharity = aCharity;

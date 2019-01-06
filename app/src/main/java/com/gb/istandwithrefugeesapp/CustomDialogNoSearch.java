@@ -26,14 +26,12 @@ class CustomDialogNoSearch extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog_no_search);
+
         TextView tx = findViewById(R.id.dialog_title);
+
         Typeface titleFont = Typeface.
                 createFromAsset(getContext().getAssets(), "fonts/Pacifico.ttf");
         tx.setTypeface(titleFont);
 
-
     }
-
-
-
 }

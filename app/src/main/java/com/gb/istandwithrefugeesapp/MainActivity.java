@@ -20,12 +20,14 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
 import com.gb.istandwithrefugeesapp.Model.BookmarkType;
 import com.gb.istandwithrefugeesapp.Model.Charity;
 import com.gb.istandwithrefugeesapp.Model.DBHelper;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -62,6 +64,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -85,6 +88,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -127,6 +131,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 import com.facebook.accountkit.AccountKit;
@@ -187,7 +192,11 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
     private SparseArray longLatMap;
     private SelectedOrgFragment selectedOrgFrag;
     private ProgressDialog progressDialog;
-    public Account getAccount() {
+    private ArrayList<String> selectedTypeOfAid;
+    private ArrayList<String> regions;
+    private  String typeOfAid;
+    private CustomDialogUkMap CustomDialogUkMap;
+           public Account getAccount() {
         return account;
     }
 
@@ -195,13 +204,46 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         this.account = account;
     }
 
-    private Account account;
+           public com.gb.istandwithrefugeesapp.CustomDialogUkMap getCustomDialogUkMap() {
+               return CustomDialogUkMap;
+           }
 
-    public String getPhoneNumberString() {
+           public void setCustomDialogUkMap(CustomDialogUkMap cduk) {
+               this.CustomDialogUkMap = cduk;
+           }
+
+
+           private Account account;
+
+           public ArrayList<String> getSelectedTypeOfAid() {
+               return selectedTypeOfAid;
+           }
+
+           public void setSelectedTypeOfAid(ArrayList<String> selectedTypeOfAid) {
+               this.selectedTypeOfAid = selectedTypeOfAid;
+           }
+
+           public ArrayList<String> getRegions() {
+               return regions;
+           }
+
+           public void setRegions(ArrayList<String> regions) {
+               this.regions = regions;
+           }
+
+           public String getPhoneNumberString() {
         return phoneNumberString;
     }
 
-    MenuItem previousItem;
+           public String getTypeOfAid() {
+               return typeOfAid;
+           }
+
+           public void setTypeOfAid(String typeOfAid) {
+               this.typeOfAid = typeOfAid;
+           }
+
+           MenuItem previousItem;
     private final ActionBarDrawerToggle drawerToggle = null;
 
     public DBHelper getDbHelper() {
@@ -648,137 +690,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         }).execute();
     }
 
-    private void refreshGlide() {
-        Glide.get(this).clearMemory();
-        class GetTabs extends AsyncTask<Void, Void, Void> {
-            int dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
-            @Override
-                protected Void doInBackground(Void... params) {
-                    Glide.get(anActivity).clearDiskCache();
 
-                    return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                super.onPostExecute(result);
-
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_google_icon.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._40sdp);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ic_menu_my_calendar.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/time.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/dropdown_arrow.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._60sdp);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/hyperlink_icon.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button_alt.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._80sdp);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/logo.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._100sdp);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ukhomebutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/overseashomebutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/onlinehomebutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/homepersonalbutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/searchbutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                ;
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/list_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/add_org_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/fundraiserbutton.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/resources_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/list_button_alt.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._150sdp);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ins_log.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._120sdp);
-                Glide.with(anActivity)
-                        .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/contributions_button.png")
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                        .preload(dimen, dimen);
-                in = 0;
-                for (int i = 0; i < dbHelper.getLogoUrls().size(); i++) {
-
-                    dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
-                    Glide.with(anActivity).load(dbHelper.getLogoUrls().get(i))
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    in = in + 1;
-                                    if (in == dbHelper.getLogoUrls().size() - 10) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(anActivity, "Organisation Added", Toast.LENGTH_LONG).show();
-                                        HomeFragment frag = new HomeFragment();
-                                        int dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
-                                        loadFragment(frag);
-                                    }
-                                    return false;
-                                }
-                            })
-                            .preload(dimen, dimen);
-                }
-            }
-        }
-           GetTabs gut = new GetTabs();
-        gut.execute();
-    }
     private void uploadWithTransferUtility() {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Nearly there...");
@@ -799,7 +711,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         File finalFile = new File(getRealPathFromURI(tempUri));
 
         final String key = "public/" + charityToBeAdded.getMarkerId() + ".png";
-        String logo = "https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/" + key;
+        final String logo = "https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/" + key;
         charityToBeAdded.setImageUrl(logo);
         TransferObserver uploadObserver =
                 transferUtility.upload(
@@ -813,7 +725,14 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             @Override
             public void onStateChanged(int id, TransferState state) {
                 if (TransferState.COMPLETED == state) {
-                    refreshGlide();
+                    int dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
+                    Glide.with(anActivity)
+                            .load(logo).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .signature(new ObjectKey(charityToBeAdded.getLastModified())))
+                            .preload(dimen, dimen);
+                    progressDialog.dismiss();
+                    HomeFragment frag = new HomeFragment();
+                    loadFragment(frag);
                 }
             }
 
@@ -1091,13 +1010,13 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 fragment = new AddTitleUkFragment();
                 anActivity.charityLogo = null;
                 anActivity.charityToBeAdded = new Charity("", "", "http://www.", "",
-                        "", "", "", "", "", "",
+                        "", "", "", "", "", "", "", "",
                         0, Integer.parseInt(anActivity.getDbHelper().getLoginId()));
                 break;
             case 4:
                 fragment = new AddTitleUkFundFragment();
                 anActivity.fundraiserToBeAdded = new Fundraiser("", "", "http://www.", "",
-                        "", "", "", "", "", "", "",
+                        "", "", "", "", "", "", "","", "",
                         null, 0, Integer.parseInt(anActivity.getDbHelper().getLoginId()));
                 break;
             case 8:
@@ -1363,7 +1282,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             if (v == ukimg_4) {
                 android.support.v4.app.Fragment frag = new AddTitleUkFundFragment();
                 anActivity.fundraiserToBeAdded = new Fundraiser("", "", "http://www.", "",
-                        "", "", "", "", "", "", "",
+                        "", "", "", "", "", "", "","", "",
                         null, 0, Integer.parseInt(anActivity.getDbHelper().getLoginId()));
                 android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
@@ -1374,8 +1293,8 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 android.support.v4.app.Fragment frag = new AddTitleUkFragment();
                 anActivity.charityLogo = null;
                 anActivity.charityToBeAdded = new Charity("", "", "http://www.", "",
-                        "", "", "", "", "",
-                        "", 0, Integer.parseInt(anActivity.getDbHelper().getLoginId()));
+                        "", "", "", "", "", "",
+                        "", "", 0, Integer.parseInt(anActivity.getDbHelper().getLoginId()));
                 android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 ft.replace(R.id.content_frame, frag);
@@ -2214,6 +2133,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                         anActivity.fundraiserToBeAdded.setCityOrTown(cityEdit.getText().toString());
                         anActivity.fundraiserToBeAdded.setPostcode(postcodeEdit.getText().toString());
                         anActivity.fundraiserToBeAdded.setRegion(area);
+                        anActivity.fundraiserToBeAdded.setLastModified("");
                         anActivity.setProgressDialog(new ProgressDialog(anActivity));
                         anActivity.getProgressDialog().setMessage("Adding Address");
                         anActivity.getProgressDialog().show();
@@ -2469,6 +2389,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                     createFromAsset(getContext().getAssets(), "fonts/Lobster_1.3.otf");
             textViewTitle.setTypeface(titleFont);
             textViewTitle.setTypeface(titleFont);
+            textViewTitle.setText("Please describe your organisation");
 
             desBox = view.findViewById(R.id.title_box);
             desBox.setText(anActivity.charityToBeAdded.getDescription());
@@ -2520,7 +2441,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 break;
                 case R.id.next_button:
                     if (checkDescription(desBox.getText().toString())) {
-                        frag = new AddWebsiteFragment();
+                        frag = new AddTypeOfAidFragment();
                         String desc = desBox.getText().toString().trim();
                         anActivity.charityToBeAdded.setDescription(desc);
                         anActivity.loadFragment(frag);
@@ -2555,6 +2476,147 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         }
     }
 
+           public static class AddTypeOfAidFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+
+               TextView textViewTitle;
+               Button nextButton;
+               TextView typeOfAidTextView;
+               Button previousButton;
+               private MainActivity anActivity;
+               private String typeOfAid;
+               ImageView dropArrow;
+               private ArrayAdapter<String> typeOfAidAdapter;
+
+               @Override
+               public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
+                   if (viewGroup != null) {
+                       viewGroup.removeAllViews();
+                   }
+                   View view = inflater.inflate(R.layout.add_uk_typeofaid, viewGroup, false);
+
+                   anActivity = (MainActivity) getActivity();
+                   assert anActivity != null;
+                   anActivity.getmTitle().setText("Type of Support");
+                   textViewTitle = view.findViewById(R.id.textviewtitle);
+                   anActivity.getSupportActionBar().show();
+                   dropArrow = view.findViewById(R.id.drop);
+                   int dimen = (int) getResources().getDimensionPixelSize(R.dimen._40sdp);
+                   Glide.with(this)
+                           .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/dropdown_arrow.png")
+                           .into(dropArrow);
+                   //sets font for icon text
+                   Typeface titleFont = Typeface.
+                           createFromAsset(getContext().getAssets(), "fonts/Lobster_1.3.otf");
+                   textViewTitle.setTypeface(titleFont);
+                   textViewTitle.setTypeface(titleFont);
+                   nextButton = view.findViewById(R.id.next_button);
+                   previousButton = view.findViewById(R.id.back_button);
+                   previousButton.setOnClickListener(this);
+                   nextButton.setOnClickListener(this);
+                   typeOfAidTextView = view.findViewById(R.id.ref_name);
+                   if (anActivity.charityToBeAdded.getTypeOfAid() != null){
+                       typeOfAid = anActivity.charityToBeAdded.getTypeOfAid();
+                       typeOfAidTextView.setText(typeOfAid);
+                   }
+                   typeOfAidTextView.setOnClickListener(this);
+                   dropArrow.setOnClickListener(this);
+                   return view;
+               }
+
+               @Override
+               public void onClick(View v) {
+                   Fragment frag;
+                   switch (v.getId()) {
+                       case R.id.back_button:
+                           anActivity.onBackPressed();
+                           break;
+                       case R.id.next_button:
+                           if (checkTypeOfAid(typeOfAid)) {
+                               frag = new AddWebsiteFragment();
+                               anActivity.charityToBeAdded.setTypeOfAid(typeOfAid);
+                               anActivity.loadFragment(frag);
+                           }
+                           break;
+                       case  R.id.ref_name :
+                           final CustomDialogNoSearch cdd = new CustomDialogNoSearch(getActivity());
+                           cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                           cdd.show();
+                           Window view = cdd.getWindow();
+                           TextView titleView = view.findViewById(R.id.dialog_title);
+                           titleView.setText("Type");
+                           ListView listView = view.findViewById(R.id.dialog_listview);
+                           List<String> typeList = new LinkedList<String>(Arrays.asList(getResources().getStringArray(R.array.type_of_aid_array)));
+                           typeOfAidAdapter = new ArrayAdapter<>(anActivity, R.layout.simple_list_item_2, typeList);
+                           typeOfAidAdapter.setDropDownViewResource(R.layout.simple_list_item_1);
+                           listView.setAdapter(typeOfAidAdapter);
+                           listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                               @Override
+                               public void onItemClick(AdapterView<?> parent, View view,
+                                                       int position, long id) {
+// TODO Auto-generated method stub
+                                   typeOfAid = parent.getItemAtPosition(position).toString();
+                                   typeOfAidTextView.setText(typeOfAid);
+                                   cdd.dismiss();
+                               }
+                           });
+                           break;
+                       case  R.id.drop:
+                           final CustomDialogNoSearch cd = new CustomDialogNoSearch(getActivity());
+                           cd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                           cd.show();
+                           view = cd.getWindow();
+                           titleView = view.findViewById(R.id.dialog_title);
+                           titleView.setText("Type");
+                           listView = view.findViewById(R.id.dialog_listview);
+                           List<String> types = new LinkedList<String>(Arrays.asList(getResources().getStringArray(R.array.type_of_aid_array)));
+                           typeOfAidAdapter = new ArrayAdapter<>(anActivity, R.layout.simple_list_item_2, types);                           typeOfAidAdapter.setDropDownViewResource(R.layout.simple_list_item_1);
+                           listView.setAdapter(typeOfAidAdapter);
+                           listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                               @Override
+                               public void onItemClick(AdapterView<?> parent, View view,
+                                                       int position, long id) {
+// TODO Auto-generated method stub
+                                   typeOfAid = parent.getItemAtPosition(position).toString();
+                                   typeOfAidTextView.setText(typeOfAid);
+                                   cd.dismiss();
+                               }
+                           });
+                           break;
+                   }
+               }
+
+               @Override
+               public void onDestroyView() {
+                   anActivity = null;
+                   dropArrow.setImageDrawable(null);
+                   dropArrow.setImageBitmap(null);
+                   if (typeOfAidAdapter != null) {
+                       typeOfAidAdapter.clear();
+                   }
+                   super.onDestroyView();
+               }
+
+               private boolean checkTypeOfAid(String typeOfAid){
+                   boolean result = true;
+                   if (typeOfAid == null || typeOfAid.length() < 1){
+                       result = false;
+                       new AlertDialog.Builder(anActivity)
+                               .setTitle("Error")
+                               .setMessage("Please select the type of support the organisation provides")
+                               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(final DialogInterface dialog, final int which) {
+                                       dialog.dismiss();
+                                   }
+                               })
+                               .setIcon(android.R.drawable.ic_dialog_alert)
+                               .show();
+                   }
+                   return result;
+               }
+           }
     public static class AddWebsiteFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
         TextView textViewTitle;
@@ -2724,6 +2786,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                         anActivity.charityToBeAdded.setCityOrTown(cityEdit.getText().toString());
                         anActivity.charityToBeAdded.setPostcode(postcodeEdit.getText().toString());
                         anActivity.charityToBeAdded.setRegion(area);
+                        anActivity.charityToBeAdded.setLastModified(String.valueOf(System.currentTimeMillis()));
                         anActivity.setProgressDialog(new ProgressDialog(anActivity));
                         anActivity.getProgressDialog().setMessage("Adding Address");
                         anActivity.getProgressDialog().show();
@@ -2756,6 +2819,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                     break;
             }
         }
+
 
 
         boolean checkInputs(){
@@ -2921,7 +2985,9 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             logoHolder = view.findViewById(R.id.logo_holder);
             int dimen = (int)getResources().getDimensionPixelSize(R.dimen._150sdp);
             if (anActivity.charityLogo == null && anActivity.charityToBeAdded.getImageUrl().length() > 2){
-                Glide.with(this).load(anActivity.charityToBeAdded.getImageUrl()) .listener(new RequestListener<Drawable>() {
+                Glide.with(this).load(anActivity.charityToBeAdded.getImageUrl()).apply(new RequestOptions()
+                        .signature(new ObjectKey(anActivity.charityToBeAdded.getLastModified()))
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         return false;
@@ -2944,7 +3010,9 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                         .asBitmap()
                         .load(stream.toByteArray())
                         .apply(new RequestOptions().override(dimen,
-                                dimen))
+                                dimen).
+                                signature(new ObjectKey(anActivity.charityToBeAdded.getLastModified()))
+                                .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                         .into(logoHolder);
             }
             if (anActivity.charityLogo == null && anActivity.charityToBeAdded.getImageUrl().length() < 2) {
@@ -3052,12 +3120,14 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         private RecyclerView.LayoutManager layoutManager;
         private  RecyclerView recyclerView;
         private TextView areaTextView;
+        private TextView typeOfAidTextView;
         private RadioButton orgCheckView;
         private RadioButton fundView;
-        private RadioButton bothView;
         private MainActivity anActivity;
         private ImageView dropArrow;
+        private ImageView dropArrowTwo;
         private ArrayAdapter<CharSequence> areaAdapter;
+        private ArrayAdapter<CharSequence> typeOfAidAdapter;
 
 
         @Override
@@ -3076,6 +3146,12 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             Glide.with(this)
                     .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/dropdown_arrow.png")
                     .into(dropArrow);
+            dropArrowTwo = view.findViewById(R.id.type_of_aid_drop);
+            Glide.with(this)
+                    .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/dropdown_arrow.png")
+                    .into(dropArrowTwo);
+            dropArrow.setOnClickListener(this);
+            dropArrowTwo.setOnClickListener(this);
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -3091,20 +3167,25 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             areaTextView = view.findViewById(R.id.ref_name);
             areaTextView.setOnClickListener(this);
 
+            typeOfAidTextView = view.findViewById(R.id.type_of_aid_list);
+            typeOfAidTextView.setOnClickListener(this);
+
             orgCheckView = view.findViewById(R.id.org_check);
             orgCheckView.setOnClickListener(this);
 
-            bothView = view.findViewById(R.id.both);
-            bothView.setOnClickListener(this);
-
             fundView = view.findViewById(R.id.fund_check);
             fundView.setOnClickListener(this);
-
+            anActivity.setTypeOfAid("");
             anActivity.setArea("");
+            ArrayList<String> list = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.type_of_aid_array)));
+            anActivity.setSelectedTypeOfAid(list);
+            list = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.area_array)));
+            anActivity.setRegions(list);
             anActivity.setSearchString("");
-            anActivity.setFund(false);
-            anActivity.setOrg(false);
-
+            anActivity.setFund(true);
+            anActivity.setOrg(true);
+            fundView.setChecked(true);
+            orgCheckView.setChecked(true);
             SearchView searchView = view.findViewById(R.id.search_list);
             searchView.setIconifiedByDefault(false);
             searchView.setSubmitButtonEnabled(false);
@@ -3231,12 +3312,15 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         }
 
         void setFilterType() {
-            if (anActivity.isFund()) {
+            if (anActivity.isFund() && !anActivity.isOrg()) {
+                System.out.println("yolo");
                 getFundFilter();
-            } else if (anActivity.isOrg()) {
+            } else if (anActivity.isOrg() && !anActivity.isFund() ) {
+                System.out.println("yohoho");
                 getOrgsFilter();
             } else {
                 getAllFilter();
+                System.out.println("yo");
             }
         }
 
@@ -3253,63 +3337,172 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         @Override
         public void onClick(View v) {
             if (v == fundView) {
-                fundView.setChecked(true);
-                orgCheckView.setChecked(false);
-                bothView.setChecked(false);
-                anActivity.setFund(true);
-                anActivity.setOrg(false);
-                getFundFilter();
-            }
+                if (anActivity.isFund()){
+                    orgCheckView.setChecked(true);
+                    fundView.setChecked(false);
+                    anActivity.setFund(false);
+                    anActivity.setOrg(true);
+                    getOrgsFilter();
+                }
+                else {
+                    anActivity.setFund(true);
+                    fundView.setChecked(true);
+                    if (anActivity.isFund() && !anActivity.isOrg()){
+                        getFundFilter();
+                    }
+                    else
+                        {
+                            adapter.getFilter().filter("");
+                        }
+                }
+                }
             if (v == orgCheckView) {
-                orgCheckView.setChecked(true);
-                bothView.setChecked(false);
-                fundView.setChecked(false);
-                anActivity.setFund(false);
-                anActivity.setOrg(true);
-                getOrgsFilter();
+                if (anActivity.isOrg()) {
+                    fundView.setChecked(true);
+                    orgCheckView.setChecked(false);
+                    anActivity.setFund(true);
+                    anActivity.setOrg(false);
+                    getFundFilter();
+                }
+                else {
+                    anActivity.setOrg(true);
+                    orgCheckView.setChecked(true);
+                    if (anActivity.isOrg() && !anActivity.isFund()){
+                        getOrgsFilter();
+                    }
+                    else
+                    {
+                        adapter.getFilter().filter("");
+                    }
+                }
             }
-            if (v == bothView) {
-                bothView.setChecked(true);
-                orgCheckView.setChecked(false);
-                fundView.setChecked(false);
-                anActivity.setFund(false);
-                anActivity.setOrg(false);
-                adapter.getFilter().filter("");
-            }
-            if (v == areaTextView) {
-                final CustomDialogNoSearch cdd = new CustomDialogNoSearch(getActivity());
+            if (v == areaTextView || v == dropArrow) {
+                final CustomDialogNoSearchWithButton cdd = new CustomDialogNoSearchWithButton(getActivity());
                 cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 cdd.show();
+                cdd.setCancelable(false);
                 Window view = cdd.getWindow();
                 TextView titleView = view.findViewById(R.id.dialog_title);
                 titleView.setText(R.string.area);
-                ListView listView = view.findViewById(R.id.dialog_listview);
+                Button button = view.findViewById(R.id.next_button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //System.out.print(anActivity.getRegions());
+                        TextView regionsText = getView().findViewById(R.id.ref_name);
+                        if (anActivity.getRegions().size() > 1){
+                            regionsText.setText("Multiple");
+                            cdd.dismiss();
+                            setFilterType();
+                        }
+                        else if (anActivity.getRegions().size() == 0){
+                            Toast.makeText(anActivity,"Please select at least one Region",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            regionsText.setText(anActivity.anActivity.getRegions().get(0));
+                            cdd.dismiss();
+                            setFilterType();
+                        }
+                    }
+                });
+                final ListView listView = view.findViewById(R.id.dialog_listview);
+                listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                listView.setItemsCanFocus(false);
                 String[] myResArray = getResources().getStringArray(R.array.area_array);
                 List<String> myResArrayList = Arrays.asList(myResArray);
-                String uk = "UK";
                 ArrayList<String> arrayList = new ArrayList<>(myResArrayList);
-                arrayList.add(uk);
-                areaAdapter = new ArrayAdapter(getContext(), R.layout.simple_list_item_1, android.R.id.text1, arrayList);
-                //areaAdapter = ArrayAdapter.createFromResource(anActivity, R.array.area_array, R.layout.simple_list_item_2);
+                areaAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
                 areaAdapter.setDropDownViewResource(R.layout.simple_list_item_1);
                 listView.setAdapter(areaAdapter);
+                for (int i = 0; i < areaAdapter.getCount(); i++){
+                    System.out.println(areaAdapter.getItem(i).toString());
+                    if (anActivity.getRegions().contains(areaAdapter.getItem(i).toString())){
+                        listView.setItemChecked(i, true);
+                    }
+                }
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-// TODO Auto-generated method stub
-                        anActivity.setArea(parent.getItemAtPosition(position).toString());
-                        TextView areaText = getView().findViewById(R.id.ref_name);
-                        areaText.setText(anActivity.getArea());
-                        setFilterType();
-                        cdd.dismiss();
+                        if (!listView.isItemChecked(position)) {
+                            anActivity.getRegions().remove(parent.getItemAtPosition(position).toString());
+                        }
+                        else {
+                            anActivity.setArea(parent.getItemAtPosition(position).toString());
+                            if (!anActivity.getRegions().contains(parent.getItemAtPosition(position).toString())) {
+                                anActivity.getRegions().add(parent.getItemAtPosition(position).toString());
+                            }
+                        }
                     }
                 });
             }
+            if (v == typeOfAidTextView || v == dropArrowTwo) {
+                final CustomDialogNoSearchWithButton cdd = new CustomDialogNoSearchWithButton(getActivity());
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
+
+                Window view = cdd.getWindow();
+                cdd.setCancelable(false);
+                TextView titleView = view.findViewById(R.id.dialog_title);
+                titleView.setText("Type Of Support");
+                Button button = view.findViewById(R.id.next_button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TextView typeOfAidText = getView().findViewById(R.id.type_of_aid_list);
+                        //System.out.print(anActivity.getSelectedTypeOfAid());
+                        if (anActivity.getSelectedTypeOfAid().size() > 1){
+                            typeOfAidText.setText("Multiple");
+                            cdd.dismiss();
+                            setFilterType();
+                            //System.out.println(anActivity.getSelectedTypeOfAid());
+                        }
+                        else if (anActivity.getSelectedTypeOfAid().size() == 0){
+                            Toast.makeText(anActivity,"Please select at least one category",
+                                    Toast.LENGTH_LONG).show();
+                            setFilterType();
+                            //System.out.println(anActivity.getSelectedTypeOfAid());
+                        }
+                        else{
+                            typeOfAidText.setText(anActivity.anActivity.getSelectedTypeOfAid().get(0));
+                            cdd.dismiss();
+                            setFilterType();
+                        }
+                        }
+                });
+                final ListView listView = view.findViewById(R.id.dialog_listview);
+                listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                listView.setItemsCanFocus(false);
+                String[] myResArray = getResources().getStringArray(R.array.type_of_aid_array);
+                List<String> myResArrayList = Arrays.asList(myResArray);
+                ArrayList<String> arrayList = new ArrayList<>(myResArrayList);
+                typeOfAidAdapter= new ArrayAdapter(getContext(), android.R.layout.simple_list_item_multiple_choice, arrayList);
+                typeOfAidAdapter.setDropDownViewResource(R.layout.simple_list_item_1);
+                listView.setAdapter(typeOfAidAdapter);
+                for (int i = 0; i < typeOfAidAdapter.getCount(); i++){
+                    System.out.println(typeOfAidAdapter.getItem(i).toString());
+                    if (anActivity.getSelectedTypeOfAid().contains(typeOfAidAdapter.getItem(i).toString())){
+                        listView.setItemChecked(i, true);
+                    }
+                }
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                 @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                     if (!listView.isItemChecked(position)) {
+                         anActivity.getSelectedTypeOfAid().remove(parent.getItemAtPosition(position).toString());
+                     } else {
+                         anActivity.setTypeOfAid(parent.getItemAtPosition(position).toString());
+                         if (!anActivity.getSelectedTypeOfAid().contains(parent.getItemAtPosition(position).toString())) {
+                             anActivity.getSelectedTypeOfAid().add(parent.getItemAtPosition(position).toString());
+                         }
+                     }
+                 }
+                });
+            }
         }
-
-
     }
 
     public static class BookmarksFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -3444,7 +3637,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 cdd.show();
                 final Window view = cdd.getWindow();
                 TextView titleView = view.findViewById(R.id.dialog_title);
-                titleView.setText("Type");
+                titleView.setText("Uk, Europe or Online");
                 ListView listView = view.findViewById(R.id.dialog_listview);
                 ArrayList<BookmarkType> arrayList = new ArrayList<>();
                 arrayList.add(0, BookmarkType.UK);
@@ -3606,7 +3799,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 cdd.show();
                 final Window view = cdd.getWindow();
                 TextView titleView = view.findViewById(R.id.dialog_title);
-                titleView.setText("Type");
+                titleView.setText("Uk, Europe or Online");
                 ListView listView = view.findViewById(R.id.dialog_listview);
                 ArrayList<BookmarkType> arrayList = new ArrayList<>();
                 arrayList.add(0, BookmarkType.UK);
@@ -3794,14 +3987,21 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
         private float selectedLat = 0;
         private Algorithm<LatLong> clusterManagerAlgorithm;
         private OverlappingMarkerSpiderfier oms;
+        private Button button;
         private ClusteringSettings clusterSettings;
+
+        public SparseArray<LatLong> getLatLongMap() {
+            return latLongMap;
+        }
+
+        public void setLatLongMap(SparseArray<LatLong> latLongMap) {
+            this.latLongMap = latLongMap;
+        }
 
         @Override
         public void onDetach() {
             super.onDetach();
         }
-
-
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -3814,11 +4014,19 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             if (bundle != null) {
                 selectedLat = bundle.getFloat("selectedLat");
                 selectedLon = bundle.getFloat("selectedLon");
-
             }
             anActivity = (MainActivity) getActivity();
+           // latLongMap = anActivity.getDbHelper().getLongLatMap().clone();
             latLongMap = anActivity.getDbHelper().getLongLatMap();
+
             anActivity.getSupportActionBar().hide();
+            button = rootView.findViewById(R.id.filter_map_button);
+            button.setOnClickListener(this);
+
+            ArrayList<String> list = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.type_of_aid_array)));
+            anActivity.setSelectedTypeOfAid(list);
+            list = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.area_array)));
+            anActivity.setRegions(list);
 
             com.androidmapsextensions.SupportMapFragment mapFragment = (com.androidmapsextensions.SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
             mapFragment.getExtendedMapAsync(this);
@@ -3832,7 +4040,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             ImageButton imageButton = autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_button);
             imageButton.setColorFilter(R.color.toolbarColor);
             autocompleteFragment.setHint("Address");
-
             autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
                 @Override
                 public void onPlaceSelected(Place place) {
@@ -3903,8 +4110,16 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
         @Override
         public void onClick(View v) {
+            if (v == button){
+                anActivity.setCustomDialogUkMap(new CustomDialogUkMap(getActivity(), this));
+                anActivity.getCustomDialogUkMap().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                anActivity.getCustomDialogUkMap().show();
+                anActivity.getCustomDialogUkMap().setCancelable(false);
+            }
 
         }
+
+
 
         @Override
         public void onDestroyView() {
@@ -3915,10 +4130,15 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             super.onDestroyView();
         }
 
+        public com.androidmapsextensions.GoogleMap getGoogleMap() {
+            return googleMap;
+        }
+
         @Override
         public void onMapReady(final com.androidmapsextensions.GoogleMap map) {
             final HashMap <String, String> mMarkers = new HashMap<>();
             googleMap = map;
+            map.clear();
 
             updateClusteringRadius(); // <= Assuming clustering is activated
             oms = new OverlappingMarkerSpiderfier(googleMap);
@@ -4141,7 +4361,9 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 titleText.setText(charity.getTitle());
                 logoUrl = charity.getImageUrl();
 
-                Glide.with(anActivity).load(logoUrl)
+                Glide.with(anActivity).load(logoUrl).apply(new RequestOptions()
+                        .signature(new ObjectKey(charity.getLastModified()))
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                         .into(logo);
                 anActivity.getmTitle().setText(R.string.details);
                 String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
@@ -4177,7 +4399,9 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 RelativeLayout rel = view.findViewById(R.id.date_time_container);
                 rel.setVisibility(View.VISIBLE);
                 logoUrl = fundraiser.getaCharity().getImageUrl();
-                Glide.with(anActivity).load(logoUrl)
+                Glide.with(anActivity).load(logoUrl).apply(new RequestOptions()
+                        .signature(new ObjectKey(fundraiser.getLastModified()))
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                         .into(logo);
                 date.setText(fundraiser.getDate());
                 TextView timeTextView = view.findViewById(R.id.time_text);

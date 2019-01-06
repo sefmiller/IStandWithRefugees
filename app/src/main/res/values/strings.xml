@@ -50,8 +50,28 @@
         <item>Wales</item>
         <item>Northern Ireland</item>
         <item>Republic of Ireland</item>
-
     </string-array>
+
+    <string-array name="type_of_aid_array">
+    <item>General or Multifaceted Support</item>
+    <item>Women and/or Children</item>
+    <item>Education "&amp;" Employability</item>
+    <item>Legal / Provision of Information</item>
+    <item>Medical, Health "&amp;" Hygiene</item>
+    <item>Technology / IT</item>
+    <item>Lgbtqia</item>
+    <item>Creative "&amp;" Activities / Labour</item>
+    <item>Food</item>
+    <item>Social work / Mental health</item>
+    <item>Activism / Awareness</item>
+    <item>Accomodation / Housing Support</item>
+    <item>Faith-Based Organisation</item>
+        <item>Gardening / Permaculture</item>
+    </string-array>
+
+    <string name="creative">Creative "&amp;" Activities / Labour</string>
+    <string name="medical">Medical, Health "&amp;" Hygiene</string>
+    <string name="education">Education "&amp;" Employability</string>
 
     <string name="home">Home</string>
     <string name="find_overseas">Locate Action Overseas</string>

@@ -24,4 +24,23 @@
         android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
         />
   </LinearLayout>
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:layout_marginLeft="@dimen/_80sdp"
+      android:layout_marginBottom="@dimen/_20sdp"
+      >
+  <Button
+      android:id="@+id/filter_map_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="@dimen/_18ssp"
+      android:padding="@dimen/_8sdp"
+      android:text="Filter Results"
+      android:background="@drawable/rounded_edit_text_ten"
+      android:textColor="@android:color/white"
+
+      />
+  </RelativeLayout>
 </FrameLayout>

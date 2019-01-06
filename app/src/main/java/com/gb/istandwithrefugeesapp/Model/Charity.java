@@ -25,6 +25,8 @@ public class Charity extends UkMarker {
                 '}';
     }
 
+
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -34,8 +36,8 @@ public class Charity extends UkMarker {
     }
 
     public Charity(String title, String description, String website, String buildingNameOrStreetNo,
-                   String street, String otherAddress, String cityorTown, String postcode, String region, String imageUrl, int markerId, int loginId) {
-        super(title, description, website, buildingNameOrStreetNo, street, otherAddress, cityorTown, postcode, region, markerId, loginId);
+                   String street, String otherAddress, String cityorTown, String postcode, String region, String typeOfAid, String lastModified, String imageUrl, int markerId, int loginId) {
+        super(title, description, website, buildingNameOrStreetNo, street, otherAddress, cityorTown, postcode, region, typeOfAid, lastModified, markerId, loginId);
         this.imageUrl = imageUrl;
     }
 }

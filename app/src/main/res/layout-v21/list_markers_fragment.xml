@@ -6,102 +6,115 @@
     android:padding="@dimen/_2sdp"
     tools:context=".MainActivity">
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/filter_layout"
-    android:background="@drawable/bottomborder_gold">
-
-    <android.support.v7.widget.SearchView
-        android:layout_width="@dimen/_125sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:id="@+id/search_list"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/rounded_edit_text_nine"
-        android:layout_marginLeft="@dimen/_20sdp"/>
-
-
-    <TextView
-        android:id="@+id/ref_name"
-        android:layout_width="@dimen/_95sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_toLeftOf="@id/drop"
-        android:layout_alignTop="@id/search_list"
-        android:textStyle="bold"
-        android:text="Area"
-        android:padding="@dimen/_6sdp"
-        android:elegantTextHeight="true"
-        android:background="@drawable/rounded_edit_text_four"
-        android:textColor="@android:color/white"
-        />
-
-    <TextView
-        android:id="@+id/results"
-        android:layout_width="@dimen/_200sdp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/org_check"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:padding="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:textColor="@android:color/holo_red_dark"
-        android:textStyle="bold"
-         />
+        android:id="@+id/filter_layout"
+        android:background="@drawable/bottomborder_gold">
 
-    <ImageView
-        android:id="@+id/drop"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/search_list"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:padding="@dimen/_7sdp"
-        android:background="@drawable/rounded_edit_text_three"
-        />
+        <android.support.v7.widget.SearchView
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/search_list"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/rounded_edit_text_nine"
+            android:layout_marginLeft="@dimen/_24sdp"/>
 
-    <RadioButton
-        android:id="@+id/org_check"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="Organisation"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/search_list"
-        android:layout_alignLeft="@id/search_list"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:gravity="center"
-        android:textStyle="bold"
-        />
-    <RadioButton
-        android:id="@+id/both"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="All"
-        android:checked="true"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/search_list"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_alignRight="@id/drop"
-        android:layout_marginRight="@dimen/_8sdp"
-        android:gravity="center"
-        android:textStyle="bold"
-        />
+        <TextView
+            android:id="@+id/ref_name"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_toRightOf="@id/search_list"
+            android:paddingLeft="@dimen/_5sdp"
+            android:layout_alignTop="@id/search_list"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:text="Area"
+            android:elegantTextHeight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/rounded_edit_text_four"
+            android:textColor="@android:color/white"
+            />
 
-    <RadioButton
-        android:id="@+id/fund_check"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="Fundraiser"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/search_list"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_toRightOf="@+id/org_check"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:gravity="center"
-        android:checkMark="@android:drawable/checkbox_off_background"
-        />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/type_of_aid_list"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:layout_toRightOf="@id/fund_check"
+            android:layout_alignTop="@id/fund_check"
+            android:textStyle="bold"
+            android:text="Type"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:elegantTextHeight="true"
+            android:background="@drawable/rounded_edit_text_four"
+            android:textColor="@android:color/white"
+            />
 
+        <ImageView
+            android:id="@+id/type_of_aid_drop"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_toRightOf="@id/type_of_aid_list"
+            android:layout_alignTop="@id/type_of_aid_list"
+            android:padding="@dimen/_7sdp"
+            android:background="@drawable/rounded_edit_text_three"
+            />
+
+        <TextView
+            android:id="@+id/results"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/org_check"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/drop"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_toRightOf="@id/ref_name"
+            android:layout_alignTop="@id/search_list"
+            android:padding="@dimen/_7sdp"
+            android:background="@drawable/rounded_edit_text_three"
+            />
+
+        <RadioButton
+            android:id="@+id/org_check"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:text="Organisation"
+            android:textSize="@dimen/_9ssp"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/search_list"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/fund_check"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:textSize="@dimen/_9ssp"
+            android:text="Fundraiser"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/search_list"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/org_check"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:gravity="center"
+            android:checkMark="@android:drawable/checkbox_off_background"
+            />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_markers_recycler_view"

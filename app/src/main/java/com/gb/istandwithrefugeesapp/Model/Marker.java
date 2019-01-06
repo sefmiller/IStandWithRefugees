@@ -11,6 +11,33 @@ public abstract class Marker {
     String cityOrTown;
     int markerId;
     private int loginId;
+    String region;
+    String typeOfAid;
+    String lastModified;
+
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getTypeOfAid() {
+        return typeOfAid;
+    }
+
+    public void setTypeOfAid(String typeOfAid) {
+        this.typeOfAid = typeOfAid;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     public int getMarkerId() {
         return markerId;
@@ -57,15 +84,19 @@ public abstract class Marker {
         this.cityOrTown = cityOrTown;
     }
 
-    Marker(String title, String description, String website, String cityOrTown, int markerId, int loginId) {
+    Marker(String title, String description, String website, String cityOrTown, String region, String typeOfAid, String lastModified,
+           int markerId, int loginId) {
         this.title = title;
         this.description = description;
         this.website = website;
         this.markerId = markerId;
         this.loginId = loginId;
         this.cityOrTown = cityOrTown;
-
-
+        this.loginId = loginId;
+        this.cityOrTown = cityOrTown;
+        this.region = region;
+        this.typeOfAid = typeOfAid;
+        this.lastModified = lastModified;
     }
 
     Marker(){}

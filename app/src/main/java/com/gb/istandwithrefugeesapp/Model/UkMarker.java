@@ -19,15 +19,7 @@ public abstract class UkMarker extends Marker {
     String street;
     String otherAddress;
     String postcode;
-    String region;
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
 
     public String getHouseNoOrBuldingName() {
         return houseNoOrBuldingName;
@@ -55,8 +47,8 @@ public abstract class UkMarker extends Marker {
 
 
     UkMarker(String title, String description, String website, String houseNoOrBuldingName, String street
-            , String otherAddress, String cityOrTown, String postcode, String region, int markerId, int loginId) {
-        super(title, description, website, cityOrTown, markerId, loginId);
+            , String otherAddress, String cityOrTown, String postcode, String region, String typeOfAid, String lastModified, int markerId, int loginId) {
+        super(title, description, website, cityOrTown, region, typeOfAid, lastModified, markerId, loginId);
 
         this.houseNoOrBuldingName = houseNoOrBuldingName;
         this.street = street;

@@ -15,7 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.signature.ObjectKey;
 import com.gb.istandwithrefugeesapp.Model.BookmarkType;
 import com.gb.istandwithrefugeesapp.Model.Charity;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
@@ -121,7 +123,9 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                 final Charity charity = (Charity) currentUkMap.get("Organisation");
                 CircleImageView logo = holder.mRelativeLayout.findViewById(R.id.logo_image);
 
-                Glide.with(mainActivity).load(charity.getImageUrl())
+                Glide.with(mainActivity).load(charity.getImageUrl()).apply(new RequestOptions()
+                        .signature(new ObjectKey(charity.getLastModified()))
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                         .into(logo);
                 markerId = charity.getMarkerId();
                 textview.setText(charity.getTitle());
@@ -132,7 +136,9 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                 markerId = fundraiser.getMarkerId();
                 CircleImageView logo = holder.mRelativeLayout.findViewById(R.id.logo_image);
 
-                Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl())
+                Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl()).apply(new RequestOptions()
+                        .signature(new ObjectKey(fundraiser.getaCharity().getLastModified()))
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                         .into(logo);
                 textview.setText(fundraiser.getTitle() + "\n" + "\n" + "For: " + fundraiser.getaCharity().getTitle());
                 title = fundraiser.getTitle();

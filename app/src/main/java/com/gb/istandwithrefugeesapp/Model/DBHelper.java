@@ -17,6 +17,7 @@
     import com.bumptech.glide.request.RequestListener;
     import com.bumptech.glide.request.RequestOptions;
     import com.bumptech.glide.request.target.Target;
+    import com.bumptech.glide.signature.ObjectKey;
     import com.gb.istandwithrefugeesapp.MainActivity;
     import com.gb.istandwithrefugeesapp.R;
     import com.gb.istandwithrefugeesapp.SplashScreenActivity;
@@ -61,6 +62,15 @@
         private String markerIdToBeAdded;
         private String orgType;
         private ArrayList<String> logoUrls = new ArrayList<>();
+        private ArrayList<String> lastModifiedList = new ArrayList<>();
+
+        public ArrayList<String> getLastModifiedList() {
+            return lastModifiedList;
+        }
+
+        public void setLastModifiedList(ArrayList<String> lastModifiedList) {
+            this.lastModifiedList = lastModifiedList;
+        }
 
         public ArrayList<String> getLogoUrls() {
             return logoUrls;
@@ -320,6 +330,7 @@
                     BufferedReader bufferedReader;
                     Glide.get(splashScreenActivity).clearDiskCache();
                     logoUrls = new ArrayList<>();
+                    lastModifiedList = new ArrayList<>();
                     try {
                         url = new URL(uri);
                         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -371,13 +382,16 @@
                                             String postcode = jsonObj.getString("Postcode");
                                             String region = jsonObj.getString("Region");
                                             String type = jsonObj.getString("Type");
+                                            String typeOfAid = jsonObj.getString("TypeOfAid");
+                                            String lastModified = jsonObj.getString("LastModified");
                                             String loginIdString = jsonObj.getString("LoginId");
                                             int loginId = Integer.parseInt(loginIdString);
                                             if (type.equals("Organisation")) {
                                                 String logoURL = jsonObj.getString("logoURL");
                                                 Charity aCharity = new Charity(title, description, website, streetNo, street,
-                                                        otherAddress, city, postcode, region, logoURL, id, loginId);
+                                                        otherAddress, city, postcode, region, typeOfAid, lastModified, logoURL, id, loginId);
                                                 logoUrls.add(logoURL);
+                                                lastModifiedList.add(lastModified);
                                                 HashMap<String, UkMarker> hashMap = new HashMap<>();
                                                 hashMap.put(type, aCharity);
                                                 markersMap.put(id, hashMap);
@@ -387,10 +401,9 @@
                                                 String linkedtoCharityId = jsonObj.getString("linkedtoCharityId");
                                                 int linkId = Integer.parseInt(linkedtoCharityId);
                                                 HashMap h = markersMap.get(linkId);
-                                                System.out.println();
                                                 Charity charity = (Charity) h.get("Organisation");
                                                 Fundraiser fundraiser = new Fundraiser(title, description, website, "23", street,
-                                                        otherAddress, city, postcode, region, fundraiserDate,
+                                                        otherAddress, city, postcode, region, typeOfAid, lastModified, fundraiserDate,
                                                         fundraiserTime, charity, id, loginId);
                                                 HashMap<String, UkMarker> hashMap = new HashMap<>();
                                                 hashMap.put(type, fundraiser);
@@ -441,7 +454,7 @@
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     Glide.get(splashScreenActivity).clearMemory();
-
+                    RequestOptions requestOptions = new RequestOptions();
                     int dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_google_icon.png")
                             .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
@@ -527,32 +540,38 @@
                             .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                             .preload(dimen, dimen);
 
-                    for (int i = 0; i < logoUrls.size(); i++) {
-                        dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
-                        Glide.with(splashScreenActivity).load(logoUrls.get(i))
-                                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-                                .listener(new RequestListener<Drawable>() {
-                                    int size = logoUrls.size() - 1;
+                    //temp
+                    splashScreenActivity.getProgressDialog().dismiss();
+                    splashScreenActivity.loadMainActivity();
+                    splashScreenActivity = null;
+                   // for (int i = 0; i < logoUrls.size(); i++) {
+                     //   dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
+                       //Glide.with(splashScreenActivity).load(logoUrls.get(i))
+                       //         .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).signature(new ObjectKey(lastModifiedList.get(i))))
+                           //     .listener(new RequestListener<Drawable>() {
+                             //       int size = logoUrls.size() - 1;
 
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        return false;
-                                    }
+                               //     @Override
+                                 //   public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                   //     System.out.println(in + "oh-oh");
+                                     //   return false;
+                                    //}
 
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        in = in + 1;
-                                        System.out.println(in);
-                                        if (in == logoUrls.size() - 10) {
-                                            splashScreenActivity.getProgressDialog().dismiss();
-                                            splashScreenActivity.loadMainActivity();
-                                            splashScreenActivity = null;
-                                        }
-                                        return false;
-                                    }
-                                })
-                                .preload(dimen, dimen);
-                    }
+                                    //@Override
+                                    //public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                      //  in = in + 1;
+                                        //System.out.println(in);
+                                        //if (in == logoUrls.size() - 10) {
+                                          //  System.out.println("here");
+                                            //splashScreenActivity.getProgressDialog().dismiss();
+                                            //splashScreenActivity.loadMainActivity();
+                                            //splashScreenActivity = null;
+                                        //}
+                                        //return false;
+                                    //}
+                                //})
+                                //.preload(dimen, dimen);
+                    //}
                 }
             }
                     GetMarkersAndLatLongs getMarkersAndLatLongs = new GetMarkersAndLatLongs();
@@ -718,8 +737,9 @@
                                 URLEncoder.encode("Region", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getCharityToBeAdded().getRegion(), "UTF-8") + "&" +
                                 URLEncoder.encode("MarkerId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mainActivity.getCharityToBeAdded().getMarkerId()), "UTF-8") + "&" +
                                 URLEncoder.encode("Website", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getCharityToBeAdded().getWebsite(), "UTF-8") + "&" +
+                                URLEncoder.encode("TypeOfAid", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getCharityToBeAdded().getTypeOfAid(), "UTF-8") + "&" +
+                                URLEncoder.encode("LastModified", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getCharityToBeAdded().getLastModified(), "UTF-8") + "&" +
                                 URLEncoder.encode("LoginId", "UTF-8") + "=" + URLEncoder.encode(loginId, "UTF-8");
-
                         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                         bufferedWriter.write(data);
                         bufferedWriter.flush();
@@ -735,6 +755,7 @@
                             bufferedWriter.close();
                             JSONObject responseJSON;
                             try {
+                                System.out.println(result);
                                 responseJSON = new JSONObject(result);
                                 markerIdToBeAdded = (responseJSON.getString("marker_id"));
                                 mainActivity.getCharityToBeAdded().setMarkerId(Integer.parseInt(markerIdToBeAdded));
@@ -796,14 +817,10 @@
                                 URLEncoder.encode("Postcode", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getFundraiserToBeAdded().getPostcode(), "UTF-8") + "&" +
                                 URLEncoder.encode("Region", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getFundraiserToBeAdded().getRegion(), "UTF-8") + "&" +
                                 URLEncoder.encode("FundraiserDate", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getFundraiserToBeAdded().getDate(), "UTF-8") + "&" +
-                        URLEncoder.encode("LinkedToCharityId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(
-                                        mainActivity.getFundraiserToBeAdded().getaCharity().getMarkerId()), "UTF-8") + "&" +
+                                URLEncoder.encode("LinkedToCharityId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mainActivity.getFundraiserToBeAdded().getaCharity().getMarkerId()), "UTF-8") + "&" +
                                 URLEncoder.encode("FundraiserTime", "UTF-8") + "=" + URLEncoder.encode(mainActivity.getFundraiserToBeAdded().getTime(), "UTF-8") + "&" +
-                                URLEncoder.encode(
-                                        "MarkerId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mainActivity.getFundraiserToBeAdded().getMarkerId()), "UTF-8") + "&" +
+                                URLEncoder.encode("MarkerId", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(mainActivity.getFundraiserToBeAdded().getMarkerId()), "UTF-8") + "&" +
                                 URLEncoder.encode("LoginId", "UTF-8") + "=" + URLEncoder.encode(loginId, "UTF-8");
-                        System.out.println(mainActivity.getFundraiserToBeAdded());
-                        System.out.println(loginId);
                         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                         bufferedWriter.write(data);
                         bufferedWriter.flush();
@@ -825,6 +842,7 @@
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            System.out.println(result + "yo");
                             orgType = "Fundraiser";
                             HashMap<String, UkMarker> hashMap = new HashMap<>();
                             hashMap.put("Fundraiser", mainActivity.getFundraiserToBeAdded());
@@ -1100,6 +1118,7 @@
                             + "+" + postcode + "&components=country:GB|postal_code:" + postcode + "&key=" + key;
                     uri = uri.replace(" ", "%20");
                     System.out.print(uri);
+
                     try {
                         URL url = new URL(uri);
                         HttpURLConnection con = (HttpURLConnection) url.openConnection();

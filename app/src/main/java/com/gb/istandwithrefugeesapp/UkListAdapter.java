@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.signature.ObjectKey;
 import com.gb.istandwithrefugeesapp.Model.Charity;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
 import com.gb.istandwithrefugeesapp.Model.LatLong;
@@ -67,8 +68,6 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
     private OrgOnlyFilter orgOnlyFilter;
     private FundraiserOnlyFilter fundFilter;
 
-
-
     @Override
     public void downloadResult() {
         if (mainActivity.getDbHelper().getBookmarksArray().contains(selectedMarkerId)){
@@ -83,7 +82,6 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
     @Override
     public void onViewRecycled(UkListAdapter.ViewHolder holder) {
         super.onViewRecycled(holder);
-        RequestManager requestManager;
         if (!mainActivity.isFinishing()) {
             Glide.with(mainActivity).clear(holder.logo);
             Glide.with(mainActivity).clear(holder.locationImg);
@@ -166,7 +164,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 .into(holder.webImage);
         Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_button.png")
                 .into(holder.mapImage);
-        System.out.println(position);
+        //System.out.println(position);
         int markerId;
         if (currentMap.containsKey("Organisation")) {
             RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
@@ -177,7 +175,9 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             markerId = charity.getMarkerId();
             textview.setText(charity.getTitle());
             title = charity.getTitle();
-            Glide.with(mainActivity).load(charity.getImageUrl())
+            Glide.with(mainActivity).load(charity.getImageUrl()).apply(new RequestOptions()
+                    .signature(new ObjectKey(charity.getLastModified()))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                     .into(holder.logo);
             TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
             String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
@@ -213,7 +213,9 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             markerId = fundraiser.getMarkerId();
             RelativeLayout dateContainer = holder.mCardView.findViewById(R.id.date_container);
             dateContainer.setVisibility(View.VISIBLE);
-            Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl())
+            Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl()).apply(new RequestOptions()
+                    .signature(new ObjectKey(fundraiser.getaCharity().getLastModified()))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                     .into(holder.logo);
             RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
             relativeLayout.setBackgroundResource(R.drawable.rounded_edit_text_five);
@@ -265,9 +267,9 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
         holder.mapImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(filterLatLongsList);
+                //System.out.println(filterLatLongsList);
                 LatLong l = filterLatLongsList.get(position + 1);
-                System.out.println("oy" + l);
+                //System.out.println("oy" + l);
                 float lat = l.getLat();
                 float lon = l.getLon();
                 Fragment frag = new MainActivity.UkMapFragment();
@@ -364,11 +366,11 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             filterLatLongsList = mainActivity.getDbHelper().getLongLatMap();
             SparseArray<LatLong> latLongSparseArray = new SparseArray<>();
             filterAllList = filterOrgsList;
-            System.out.println(filterAllList.get(0));
+            System.out.println(filterAllList.get(filterAllList.size()-1));
+            System.out.println(filterAllList.get(filterAllList.size()));
             FilterResults filterResults = new FilterResults();
             SparseArray<HashMap<String, UkMarker>> tempMap = new SparseArray<>();
-            if (mainActivity.getArea()!=null && mainActivity.getArea().length()>0
-                    && !mainActivity.getArea().equals("UK")) {
+            if (mainActivity.getRegions()!=null && mainActivity.getRegions().size()>0) {
                 HashMap<String, UkMarker> tempMarkerMap;
                 int indexKey = 1;
                 for (int i = 0; i < filterAllList.size(); i++) {
@@ -376,8 +378,8 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     if (tempMarkerMap.containsKey("Organisation")) {
                         Charity charity = (Charity) tempMarkerMap.get("Organisation");
                         String name = charity.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
-                             LatLong latLong = filterLatLongsList.get(i + 1);
+                        if (mainActivity.getRegions().contains(name)) {
+                            LatLong latLong = filterLatLongsList.get(i + 1);
                              latLongSparseArray.put(indexKey, latLong);
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             indexKey = indexKey + 1;
@@ -385,7 +387,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     } else {
                         Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
                         String name = fun.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
                             tempMap.put(indexKey, filterAllList.get(i + 1));
@@ -406,7 +408,46 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             filterAllList = (SparseArray<HashMap<String, UkMarker>>) filterResults.values;
 
             filterResults = new FilterResults();
+            if (mainActivity.getSelectedTypeOfAid()!=null && mainActivity.getSelectedTypeOfAid().size()>0) {
+                tempMap = new SparseArray<>();
+                latLongSparseArray = new SparseArray<>();
+                HashMap<String, UkMarker> tempMarkerMap;
+                int indexKey = 1;
+                for (int i = 0; i < filterAllList.size(); i++) {
+                    tempMarkerMap = filterAllList.get(i + 1);
+                    if (tempMarkerMap.containsKey("Organisation")) {
+                        Charity charity = (Charity) tempMarkerMap.get("Organisation");
+                        String typeOfAid = charity.getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                    else{
+                        Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
+                        String typeOfAid = fun.getaCharity().getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                }
+                filterResults.count = tempMap.size();
+                filterResults.values = tempMap;
+                filterLatLongsList = latLongSparseArray;
+                //System.out.println(filterLatLongsList.size() + "oy");
+            }
+            else {
+                filterResults.count = filterAllList.size();
+                filterResults.values = filterAllList;
+            }
+            filterAllList = (SparseArray<HashMap<String,UkMarker>>) filterResults.values;
 
+            filterResults = new FilterResults();
             if (constraint!=null && constraint.length()>0) {
 
                 tempMap = new SparseArray<>();
@@ -432,10 +473,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     filterResults.count = filterAllList.size();
                     filterResults.values = filterAllList;
             }
-
             filterAllList = (SparseArray<HashMap<String, UkMarker>>) filterResults.values;
-
-
             filterResults = new FilterResults();
             if (mainActivity.getSearchString()!=null && mainActivity.getSearchString().length()>0) {
                 ArrayList<String> tempList = new ArrayList<>();
@@ -498,11 +536,10 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             filterAllList = filterOrgsList;
             filterLatLongsList = mainActivity.getDbHelper().getLongLatMap();
             SparseArray<LatLong> latLongSparseArray = new SparseArray<>();
-            System.out.println(filterAllList.size() + "oy");
+            //System.out.println(filterAllList.size() + "oy");
             FilterResults filterResults = new FilterResults();
 
-            if (mainActivity.getArea()!=null && mainActivity.getArea().length()>0
-                    && !mainActivity.getArea().equals("UK")) {
+            if (mainActivity.getRegions()!=null && mainActivity.getRegions().size()>0) {
                 SparseArray<HashMap<String, UkMarker>> tempMap = new SparseArray<>();
                 HashMap<String, UkMarker> tempMarkerMap;
                 int indexKey = 1;
@@ -511,7 +548,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     if (tempMarkerMap.containsKey("Organisation")) {
                         Charity charity = (Charity) tempMarkerMap.get("Organisation");
                         String name = charity.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
@@ -521,7 +558,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     else{
                         Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
                         String name = fun.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
@@ -538,8 +575,48 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 filterResults.count = filterAllList.size();
                 filterResults.values = filterAllList;
             }
-            System.out.println(filterResults.count + "oyoy");
+            //System.out.println(filterResults.count + "oyoy");
             filterAllList = (SparseArray<HashMap<String, UkMarker>>) filterResults.values;
+
+            filterResults = new FilterResults();
+            if (mainActivity.getSelectedTypeOfAid()!=null && mainActivity.getSelectedTypeOfAid().size()>0) {
+                SparseArray<HashMap<String, UkMarker>> tempMap = new SparseArray<>();
+                latLongSparseArray = new SparseArray<>();
+                HashMap<String, UkMarker> tempMarkerMap;
+                int indexKey = 1;
+                for (int i = 0; i < filterAllList.size(); i++) {
+                    tempMarkerMap = filterAllList.get(i + 1);
+                    if (tempMarkerMap.containsKey("Organisation")) {
+                        Charity charity = (Charity) tempMarkerMap.get("Organisation");
+                        String typeOfAid = charity.getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                    else{
+                        Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
+                        String typeOfAid = fun.getaCharity().getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                }
+                filterResults.count = tempMap.size();
+                filterResults.values = tempMap;
+                filterLatLongsList = latLongSparseArray;
+                //System.out.println(filterLatLongsList.size() + "oy");
+            }
+            else {
+                filterResults.count = filterAllList.size();
+                filterResults.values = filterAllList;
+            }
+            filterAllList = (SparseArray<HashMap<String,UkMarker>>) filterResults.values;
 
             filterResults = new FilterResults();
             if (constraint!=null && constraint.length()>0) {
@@ -567,7 +644,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 filterResults.count = filterAllList.size();
                 filterResults.values = filterAllList;
             }
-            System.out.println(filterResults.count + "hey");
+            //System.out.println(filterResults.count + "hey");
             filterAllList = (SparseArray<HashMap<String,UkMarker>>) filterResults.values;
 
             if (mainActivity.getSearchString()!=null && mainActivity.getSearchString().length()>0) {
@@ -591,7 +668,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     else{
                         Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
                         String name = fun.getTitle() + " for: " +  fun.getaCharity().getTitle();
-                        if (name.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
@@ -631,11 +708,10 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
         protected FilterResults performFiltering(CharSequence constraint) {
             filterAllList = filterOrgsList;
             filterLatLongsList = mainActivity.getDbHelper().getLongLatMap();
-            System.out.println(filterLatLongsList.size());
+            //System.out.println(filterLatLongsList.size());
             SparseArray<LatLong> latLongSparseArray = new SparseArray<>();
             FilterResults filterResults = new FilterResults();
-            if (mainActivity.getArea()!=null && mainActivity.getArea().length()>0
-                    && !mainActivity.getArea().equals("UK")) {
+            if (mainActivity.getRegions()!=null && mainActivity.getRegions().size()>0) {
                 SparseArray<HashMap<String, UkMarker>> tempMap = new SparseArray<>();
                 HashMap<String, UkMarker> tempMarkerMap;
                 int indexKey = 1;
@@ -644,7 +720,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     if (tempMarkerMap.containsKey("Organisation")) {
                         Charity charity = (Charity) tempMarkerMap.get("Organisation");
                         String name = charity.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
@@ -654,7 +730,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     else{
                         Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
                         String name = fun.getRegion();
-                        if (name.toLowerCase().contains(mainActivity.getArea().toLowerCase())) {
+                        if (mainActivity.getRegions().contains(name)) {
                             tempMap.put(indexKey, filterAllList.get(i + 1));
                             LatLong latLong = filterLatLongsList.get(i + 1);
                             latLongSparseArray.put(indexKey, latLong);
@@ -665,7 +741,47 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 filterResults.count = tempMap.size();
                 filterResults.values = tempMap;
                 filterLatLongsList = latLongSparseArray;
-                System.out.println(filterLatLongsList.size() + "oy");
+                //System.out.println(filterLatLongsList.size() + "oy");
+            }
+            else {
+                filterResults.count = filterAllList.size();
+                filterResults.values = filterAllList;
+            }
+            filterAllList = (SparseArray<HashMap<String,UkMarker>>) filterResults.values;
+
+            filterResults = new FilterResults();
+            if (mainActivity.getSelectedTypeOfAid()!=null && mainActivity.getSelectedTypeOfAid().size()>0) {
+                SparseArray<HashMap<String, UkMarker>> tempMap = new SparseArray<>();
+                latLongSparseArray = new SparseArray<>();
+                HashMap<String, UkMarker> tempMarkerMap;
+                int indexKey = 1;
+                for (int i = 0; i < filterAllList.size(); i++) {
+                    tempMarkerMap = filterAllList.get(i + 1);
+                    if (tempMarkerMap.containsKey("Organisation")) {
+                        Charity charity = (Charity) tempMarkerMap.get("Organisation");
+                        String typeOfAid = charity.getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                    else{
+                        Fundraiser fun = (Fundraiser) tempMarkerMap.get("Fundraiser");
+                        String typeOfAid = fun.getaCharity().getTypeOfAid();
+                        if (mainActivity.getSelectedTypeOfAid().contains(typeOfAid)) {
+                            tempMap.put(indexKey, filterAllList.get(i + 1));
+                            LatLong latLong = filterLatLongsList.get(i + 1);
+                            latLongSparseArray.put(indexKey, latLong);
+                            indexKey = indexKey + 1;
+                        }
+                    }
+                }
+                filterResults.count = tempMap.size();
+                filterResults.values = tempMap;
+                filterLatLongsList = latLongSparseArray;
+                //System.out.println(filterLatLongsList.size() + "oy");
             }
             else {
                 filterResults.count = filterAllList.size();
@@ -706,7 +822,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 filterResults.count = tempMap.size();
                 filterResults.values = tempMap;
                 filterLatLongsList = latLongSparseArray;
-                System.out.println(filterLatLongsList.size() + "oyoy");
+                //System.out.println(filterLatLongsList.size() + "oyoy");
 
             }
             else {
@@ -731,7 +847,11 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mDataset = (SparseArray<HashMap<String, UkMarker>>) results.values;
-            System.out.println(mDataset);
+            for (int i = 1; i <= filterOrgsList.size(); i++) {
+                if (mDataset.get(i) == null || mDataset.get(i).isEmpty() || mDataset.get(i).equals(null)){
+                    System.out.println("error" + i);
+                }
+            }
             listMarkersFrag.setResults();
 
         }
