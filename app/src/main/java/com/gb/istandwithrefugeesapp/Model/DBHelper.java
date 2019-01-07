@@ -328,7 +328,6 @@
                     URL url;
                     String uri = params[0];
                     BufferedReader bufferedReader;
-                    Glide.get(splashScreenActivity).clearDiskCache();
                     logoUrls = new ArrayList<>();
                     lastModifiedList = new ArrayList<>();
                     try {
@@ -453,125 +452,122 @@
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
-                    Glide.get(splashScreenActivity).clearMemory();
-                    RequestOptions requestOptions = new RequestOptions();
                     int dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_google_icon.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._40sdp);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ic_menu_my_calendar.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/time.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/dropdown_arrow.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int)splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._60sdp);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/hyperlink_icon.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button_alt.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._80sdp);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/logo.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int)splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._100sdp);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ukhomebutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/overseashomebutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/onlinehomebutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/homepersonalbutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/searchbutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);;
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/list_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/add_org_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/fundraiserbutton.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/resources_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/list_button_alt.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int)splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._150sdp);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/ins_log.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
                     dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._120sdp);
                     Glide.with(splashScreenActivity)
                             .load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/contributions_button.png")
-                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                            .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                             .preload(dimen, dimen);
 
                     //temp
                     splashScreenActivity.getProgressDialog().dismiss();
                     splashScreenActivity.loadMainActivity();
                     splashScreenActivity = null;
-                   // for (int i = 0; i < logoUrls.size(); i++) {
-                     //   dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
-                       //Glide.with(splashScreenActivity).load(logoUrls.get(i))
-                       //         .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).signature(new ObjectKey(lastModifiedList.get(i))))
-                           //     .listener(new RequestListener<Drawable>() {
-                             //       int size = logoUrls.size() - 1;
+                   for (int i = 0; i < logoUrls.size(); i++) {
+                        dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
+                       Glide.with(splashScreenActivity).load(logoUrls.get(i))
+                                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).signature(new ObjectKey(lastModifiedList.get(i))))
+                                .listener(new RequestListener<Drawable>() {
+                                    int size = logoUrls.size() - 1;
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        System.out.println(in + "oh-oh");
+                                        return false;
+                                    }
 
-                               //     @Override
-                                 //   public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                   //     System.out.println(in + "oh-oh");
-                                     //   return false;
-                                    //}
-
-                                    //@Override
-                                    //public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                      //  in = in + 1;
-                                        //System.out.println(in);
-                                        //if (in == logoUrls.size() - 10) {
-                                          //  System.out.println("here");
-                                            //splashScreenActivity.getProgressDialog().dismiss();
-                                            //splashScreenActivity.loadMainActivity();
-                                            //splashScreenActivity = null;
-                                        //}
-                                        //return false;
-                                    //}
-                                //})
-                                //.preload(dimen, dimen);
-                    //}
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        in = in + 1;
+                                        System.out.println(in);
+                                        if (in == logoUrls.size() - 20) {
+                                            System.out.println("here");
+                                            splashScreenActivity.getProgressDialog().dismiss();
+                                            splashScreenActivity.loadMainActivity();
+                                            splashScreenActivity = null;
+                                        }
+                                        return false;
+                                    }
+                                })
+                                .preload(dimen, dimen);
+                    }
                 }
             }
                     GetMarkersAndLatLongs getMarkersAndLatLongs = new GetMarkersAndLatLongs();

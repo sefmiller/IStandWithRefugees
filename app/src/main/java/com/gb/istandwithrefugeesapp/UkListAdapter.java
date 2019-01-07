@@ -177,7 +177,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             title = charity.getTitle();
             Glide.with(mainActivity).load(charity.getImageUrl()).apply(new RequestOptions()
                     .signature(new ObjectKey(charity.getLastModified()))
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                     .into(holder.logo);
             TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
             String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
@@ -215,7 +215,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             dateContainer.setVisibility(View.VISIBLE);
             Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl()).apply(new RequestOptions()
                     .signature(new ObjectKey(fundraiser.getaCharity().getLastModified()))
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                     .into(holder.logo);
             RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
             relativeLayout.setBackgroundResource(R.drawable.rounded_edit_text_five);

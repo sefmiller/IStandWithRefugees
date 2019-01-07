@@ -66,7 +66,7 @@ class CustomInfoViewAdapter implements com.androidmapsextensions.GoogleMap.InfoW
         int dimen = (int) mainActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
         Glide.with(mainActivity).load(logoUrl).apply(new RequestOptions()
                 .signature(new ObjectKey(lastModified))
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).listener(new RequestListener<Drawable>() {
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)).listener(new RequestListener<Drawable>() {
 
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -95,7 +95,7 @@ class CustomInfoViewAdapter implements com.androidmapsextensions.GoogleMap.InfoW
         CircleImageView circleImageView = popup.findViewById(R.id.nat_circle_image_view);
         Glide.with(mainActivity).load(logoUrl).apply(new RequestOptions()
                 .signature(new ObjectKey(lastModified))
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).into(circleImageView);
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)).into(circleImageView);
         return popup;
     }
 }

@@ -125,7 +125,7 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
 
                 Glide.with(mainActivity).load(charity.getImageUrl()).apply(new RequestOptions()
                         .signature(new ObjectKey(charity.getLastModified()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                         .into(logo);
                 markerId = charity.getMarkerId();
                 textview.setText(charity.getTitle());
@@ -138,7 +138,7 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
 
                 Glide.with(mainActivity).load(fundraiser.getaCharity().getImageUrl()).apply(new RequestOptions()
                         .signature(new ObjectKey(fundraiser.getaCharity().getLastModified()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                         .into(logo);
                 textview.setText(fundraiser.getTitle() + "\n" + "\n" + "For: " + fundraiser.getaCharity().getTitle());
                 title = fundraiser.getTitle();

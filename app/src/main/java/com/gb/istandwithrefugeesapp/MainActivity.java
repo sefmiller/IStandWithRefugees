@@ -727,7 +727,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 if (TransferState.COMPLETED == state) {
                     int dimen = (int) anActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
                     Glide.with(anActivity)
-                            .load(logo).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .load(logo).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                             .signature(new ObjectKey(charityToBeAdded.getLastModified())))
                             .preload(dimen, dimen);
                     progressDialog.dismiss();
@@ -971,13 +971,11 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
             @Override
             protected Void doInBackground(Void... params) {
-                Glide.get(anActivity).clearDiskCache();
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result) {
-                Glide.get(anActivity).clearMemory();
                 getFragmentManager().popBackStack();
                 AccountKit.logOut();
                 super.onPostExecute(result);
@@ -2987,7 +2985,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
             if (anActivity.charityLogo == null && anActivity.charityToBeAdded.getImageUrl().length() > 2){
                 Glide.with(this).load(anActivity.charityToBeAdded.getImageUrl()).apply(new RequestOptions()
                         .signature(new ObjectKey(anActivity.charityToBeAdded.getLastModified()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)).listener(new RequestListener<Drawable>() {
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)).listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         return false;
@@ -3012,7 +3010,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                         .apply(new RequestOptions().override(dimen,
                                 dimen).
                                 signature(new ObjectKey(anActivity.charityToBeAdded.getLastModified()))
-                                .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                         .into(logoHolder);
             }
             if (anActivity.charityLogo == null && anActivity.charityToBeAdded.getImageUrl().length() < 2) {
@@ -4363,7 +4361,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
                 Glide.with(anActivity).load(logoUrl).apply(new RequestOptions()
                         .signature(new ObjectKey(charity.getLastModified()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                         .into(logo);
                 anActivity.getmTitle().setText(R.string.details);
                 String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
@@ -4401,7 +4399,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
                 logoUrl = fundraiser.getaCharity().getImageUrl();
                 Glide.with(anActivity).load(logoUrl).apply(new RequestOptions()
                         .signature(new ObjectKey(fundraiser.getLastModified()))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                         .into(logo);
                 date.setText(fundraiser.getDate());
                 TextView timeTextView = view.findViewById(R.id.time_text);
