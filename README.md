@@ -2,46 +2,50 @@
 
 ## I Stand With Refugees is an Android Application mapping all organisations working with refugees in the UK and Europe
 
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-07-07.jpg)
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-00.png)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-12.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-24.jpg)
 
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-32.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-06-13.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-07-07.jpg)
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-32.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-58.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-06-13.jpg)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-07-07.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-08-33.jpg)
 
+I Stand With Refugees was developed as a response to working in the Calais Jungle Refugee camp and becoming aware of a need for a mobile information hub which provides quickly accessible information of all charitable organisations working for, and with, refugees and asylum seekers. 
 
+Organisations exist in the UK and overseas which provide a range of services for a refugee such as refugee led NGOs, translation, legal services, collecting & delivering aid, fundraising, family reunification, employment assistance, training, befriending and language learning, to name but a few. There has been a great deal of good will towards the plight of refugees fleeing persecution, poverty and terror and the application intends to give that good will, greater exposure. 
 
-The app can be used by a refugee to trace a family member missing along the refugee route, or by a certified aid worker, acting on their behalf.
-
-A refugee's details are recorded and are then searchable by other users. Enough details are recorded to be identified by a family member, without disclosing personal, sensitive information. A search algorithm sources the most probable matches. Upon accepting a possible match, each user exchanges a short voice message. If both users confirm that the voice message belongs to their missing family member, then an aid organisation in the local area is brought in to establish re-unifacion. 
-
-The concept arose from personal experieince of working within a refugee camp with other aid workers. A mobile phone is the most valuable posession of a refugee, as a means of staying in contact with home and family and also sending and recieving currency. Whilst crossing borders along the route, smart phones can be lost, stolen or contacts lost through changing to a sim in a different locale. The app provides a solution by empowering refugees to re-connect with their family members. The app is available in 14 Languages
-
-#### The project is currently unfinished, awaiting an injection of funding.
-
+Features
+* I Stand With Refugees provides an interactive map which allows users to quickly enter a postcode or their current location and discover what refugee related services are going on locally. 
+* For refugees and asylum seekers, it is a pit stop for securing assistance and a welcome on arrival. 
+* For those looking to volunteer, you'll find a plethora of opportunities to help out up and down the country and further afield, across Europe. 
+* The app allows user to add details of their organisations working in the UK and Europe or and online only aid, such as providing phone credit. 
+* Users can add fundraising events such as gigs, auctions, art shows or aid collections.
+* Bookmark an Organisation or Fundraiser to come back to later.
 
 ###  Dependencies 
 
 The Following modules are used in the app:
 
-WheelPicker https://github.com/AigeStudio/WheelPicker. Wheel picker used to select the language. 
-
 CircleImageView https://github.com/hdodenhof/CircleImageView. Used to provide a circular, bordered imageview to contain image files.
 
-IntlPhoneInput https://github.com/AlmogBaku/IntlPhoneInput. Contains all country codes/ flags to simplify a user inputting their phone number.
+ImagePicker https://github.com/Mariovc/ImagePicker. Starts native android Gallery/Photos application. On a user picking an image, it is placed into an ImageView.
+
+ShowcaseView https://github.com/amlcurran/ShowcaseView.  Highlight and showcase specific parts of apps to the user with a distinctive and attractive overlay, for tutorial purposes.
+
+ThreeTenABP https://github.com/JakeWharton/ThreeTenABP. Backported Adaption of the Java 310 date and time API. Provides 
+
+Glide. https://github.com/bumptech/glide. An Image loading framework to cache images, manage memory usage and load images from URLS.
+
+Glide https://github.com/bumptech/glide.  Used to retrieve images from URLS and cache into local memory. Used primarily for its superior automatic image recycling.
+
+ThreeTenABP https://github.com/JakeWharton/ThreeTenABP. Backport of the updated Android Time & Date libraries (JSR 310) to support older Android OS.
+
+Facebook Account kit. Provides a simple login solution, verifying a user by sending a verification code via text to their provided number. As the app does not capture and senitive personal information this simpler approach is preferable to a traditional username/password approach.
 
 Amazon AWS S3. Used to securely store, upload and download data such as voicemails and image files.
-
-Amazon AWS Cognito. Used to authenticate and identify user and allocate access tokens.
 
 Amazon AWS Dynamo. Provides a database instance.
 
 Amazon EC2. Hosts a linux web server. The SQL database tables are accessed through phpMyadmin. Php scripts are used to fetch the data from the database and our encoded into JSON, which is then readable by the application. 
 
-Amazon SNS. Texts messaging facilitates authenticating and identifying a user and retrieve losts details.
-
-Glide https://github.com/bumptech/glide.  Used to retrieve images from URLS and cache into local memory. Used primarily for its superior automatic image recycling.
-
-ThreeTenABP https://github.com/JakeWharton/ThreeTenABP. Backport of the updated Android Time & Date libraries (JSR 310) to support older Android OS.
 
 ### Building
 
