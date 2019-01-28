@@ -2,11 +2,11 @@
 
 ## I Stand With Refugees is an Android Application mapping all organisations working with refugees in the UK and Europe
 
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_ 2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/WeChat Image_20190129002138.jpg)
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-12.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/WeChat Image_20190129002203.jpg)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_ 2018-07-24-16-36-52.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-04-54.png)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/1.jpg)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-12.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/2.jpg)
 
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/WeChat Image_20190129002211.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-58.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/WeChat Image_20190129002218.jpg)
-![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/WeChat Image_20190129002543.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-08-33.jpg)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/3.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-05-58.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/4.jpg)
+![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/5.jpg)![alt text](https://github.com/sefmiller/IstandWithRefugees/blob/master/art/Screenshot_2018-07-24-17-08-33.jpg)
 
 I Stand With Refugees was developed as a response to working in the Calais Jungle Refugee camp and becoming aware of a need for a mobile information hub which provides quickly accessible information of all charitable organisations working for, and with, refugees and asylum seekers. 
 
