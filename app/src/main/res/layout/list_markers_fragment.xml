@@ -18,7 +18,7 @@
             android:id="@+id/search_list"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/rounded_edit_text_nine"
-            android:layout_marginLeft="@dimen/_24sdp"/>
+            android:layout_marginLeft="@dimen/_22sdp"/>
 
         <TextView
             android:id="@+id/ref_name"

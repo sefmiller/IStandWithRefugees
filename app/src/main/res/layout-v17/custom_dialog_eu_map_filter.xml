@@ -1,0 +1,292 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/customPanel"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edit_text_two"
+            >
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Filter Results"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_20ssp" />
+
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout2"
+        >
+
+        <Button
+            android:id="@+id/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/country_text"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_edit_text_ten"
+            android:padding="@dimen/_8sdp"
+            android:text="Filter Results"
+            android:textColor="@android:color/white"
+            android:layout_margin="@dimen/_12sdp"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/country_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/gar_check"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="Regions"
+            android:textColor="#275A6B"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/country_text"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_below="@id/country_title"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:background="@drawable/rounded_edit_text_four"
+            android:elegantTextHeight="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="Regions"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/countries_drop"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_toRightOf="@id/country_text"
+            android:layout_alignTop="@id/country_text"
+            android:padding="@dimen/_7sdp"
+            android:background="@drawable/rounded_edit_text_three"
+            />
+
+        <TextView
+            android:id="@+id/type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="Type of Support"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="#275A6B"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/gen_check"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_below="@+id/wom_check"
+            android:layout_toStartOf="@+id/wom_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="General or Multifaceted"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/wom_check"
+            android:layout_width="@dimen/_93sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_below="@+id/type_title"
+            android:layout_toEndOf="@+id/emp_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Women and/or Children"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/emp_check"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_below="@+id/type_title"
+            android:layout_toEndOf="@+id/lgbtqia_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="Education  Employability"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/med_check"
+             android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/emp_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            
+            android:text="Medical, Health  Hygiene"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/lgbtqia_check"
+             android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/med_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="Lgbtqia"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/food_check"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/lgbtqia_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="Food"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/act_check"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignStart="@+id/gen_check"
+            android:layout_below="@+id/lgbtqia_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="Activism / Awareness"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/acc_check2"
+            android:layout_width="@dimen/_93sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_below="@+id/gen_check"
+            android:layout_toEndOf="@+id/gen_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Accomodation / Housing"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold" />
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/leg_check"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_93sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_alignTop="@+id/gen_check"
+            android:layout_toEndOf="@+id/gen_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Legal / Information"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/tech_check"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/type_title"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Technology / IT"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/creative_check"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignStart="@+id/gen_check"
+            android:layout_below="@+id/gen_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:text="Creative Activities / Labour"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/social_check"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/food_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Social work / Mental health"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/faith_check"
+            android:layout_width="@dimen/_93sdp"
+            android:paddingRight="@dimen/_2sdp"
+            android:layout_height="@dimen/_31sdp"
+            android:layout_alignStart="@+id/wom_check"
+            android:layout_below="@+id/lgbtqia_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:text="Faith-Based Organisation"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/gar_check"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/food_check"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_5sdp"
+            android:text="Gardening / Permaculture"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    </RelativeLayout>

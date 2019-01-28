@@ -291,10 +291,10 @@ public class OverlappingMarkerSpiderfier {
         double angle = 0;
         List<Point> points = new ArrayList<>(count);
         for (int ind = 0; ind < count; ind++) {
-            int spiralFootSeparation = 26;
+            int spiralFootSeparation = 40;
             angle += spiralFootSeparation / legLength + ind * SPIRAL_ANGLE_STEP;
             points.add(new Point((int)(centerPt.x + legLength * Math.cos(angle)),(int)(centerPt.y + legLength * Math.sin(angle))));
-            int spiralLengthFactor = 4;
+            int spiralLengthFactor = 12;
             legLength += TWO_PI * spiralLengthFactor / angle;
         }
         return points;
@@ -517,7 +517,7 @@ public class OverlappingMarkerSpiderfier {
         List<Point> footPts;
         /* circleSpiralSwitchover is the lowest number of markers that will be fanned out into a spiral instead of a circle.
      0 -> always spiral; Infinity -> always circle. */
-        int circleSpiralSwitchover = 9;
+        int circleSpiralSwitchover = 6;
         if (numFeet >= circleSpiralSwitchover){
             footPts=generatePtsSpiral(numFeet,bodyPt);
             Collections.reverse(footPts);

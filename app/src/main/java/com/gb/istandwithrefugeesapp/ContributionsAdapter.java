@@ -20,7 +20,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
 import com.gb.istandwithrefugeesapp.Model.BookmarkType;
 import com.gb.istandwithrefugeesapp.Model.Charity;
+import com.gb.istandwithrefugeesapp.Model.EUMarker;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
+import com.gb.istandwithrefugeesapp.Model.OnlineAid;
+import com.gb.istandwithrefugeesapp.Model.UkMarker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,15 +45,7 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
     private Bitmap currentBookmarkBitmap;
     private Bitmap resourcesBookmarkBitmap;
     private int markerId;
-
-
-
     private AllFilter allFilter;
-
-
-
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
@@ -59,6 +54,7 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
             super(v);
             mRelativeLayout = v;
             mRelativeLayout.setOnClickListener(this);
+
 
         }
 
@@ -83,6 +79,20 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                     fragment = new MainActivity.AddTitleUkFundFragment();
                     mainActivity.loadFragment(fragment);
                 }
+            }
+            else if (currentMap.containsKey(BookmarkType.ONLINE)) {
+                OnlineAid onlineAid = (OnlineAid) currentMap.get(BookmarkType.ONLINE);
+                    mainActivity.setOnlineAidToBeAdded(onlineAid);
+                    mainActivity.setOnlineLogo(null);
+                    fragment = new MainActivity.AddTitleOnlineFragment();
+                    mainActivity.loadFragment(fragment);
+                }
+                else {
+                EUMarker euMarker = (EUMarker) currentMap.get(BookmarkType.OVERSEAS);
+               mainActivity.setEUMarkerToBeAdded(euMarker);
+                mainActivity.setEULogo(null);
+                fragment = new MainActivity.AddTitleEUFragment();
+                mainActivity.loadFragment(fragment);
             }
         }
     }
@@ -118,11 +128,10 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
         textview.setTypeface(titleFont);
 
         if (currentMap.containsKey(BookmarkType.UK)) {
-            HashMap currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
+            HashMap<String, UkMarker> currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
             if (currentUkMap.containsKey("Organisation")) {
                 final Charity charity = (Charity) currentUkMap.get("Organisation");
                 CircleImageView logo = holder.mRelativeLayout.findViewById(R.id.logo_image);
-
                 Glide.with(mainActivity).load(charity.getImageUrl()).apply(new RequestOptions()
                         .signature(new ObjectKey(charity.getLastModified()))
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
@@ -144,14 +153,30 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                 title = fundraiser.getTitle();
                 //set Image
             }
+        } else if (currentMap.containsKey(BookmarkType.OVERSEAS)) {
+            EUMarker euMarker = (EUMarker) currentMap.get(BookmarkType.OVERSEAS);
+            CircleImageView logo = holder.mRelativeLayout.findViewById(R.id.logo_image);
+            Glide.with(mainActivity).load(euMarker.getImageUrl()).apply(new RequestOptions()
+                    .signature(new ObjectKey(euMarker.getLastModified()))
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                    .into(logo);
+            markerId = euMarker.getMarkerId();
+            textview.setText(euMarker.getTitle());
+            title = euMarker.getTitle();
+        } else {
+            OnlineAid onlineAid = (OnlineAid) currentMap.get(BookmarkType.ONLINE);
+            CircleImageView logo = holder.mRelativeLayout.findViewById(R.id.logo_image);
+            Glide.with(mainActivity).load(onlineAid.getLogoUrl()).apply(new RequestOptions()
+                    .signature(new ObjectKey(onlineAid.getLastModified()))
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                    .into(logo);
+            markerId = onlineAid.getMarkerId();
+            textview.setText(onlineAid.getTitle());
+            title = onlineAid.getTitle();
+
+
         }
-        else if(currentMap.containsKey(BookmarkType.OVERSEAS)) {
-            //to do
-        }
-        else {
-            //to do
-        }
-}
+    }
 
 
 
@@ -214,7 +239,7 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                 for (int key: keys) {
                     TreeMap currentMap = (TreeMap) filterAllList.get(key);
                     if (currentMap.containsKey(BookmarkType.UK)) {
-                        HashMap currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
+                        HashMap<String,UkMarker> currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
                         if (currentUkMap.containsKey("Organisation")) {
                             Charity charity = (Charity) currentUkMap.get("Organisation");
                             String name = charity.getTitle();
@@ -230,9 +255,21 @@ class ContributionsAdapter extends RecyclerView.Adapter<ContributionsAdapter.Vie
                                 indexKey = indexKey + 1;
                             }
                         }
-                    } else {
-                        //TODO overseas, online search}
+                    } else if (currentMap.containsKey(BookmarkType.ONLINE)) {
+                        OnlineAid onlineAid = (OnlineAid) currentMap.get(BookmarkType.ONLINE);
+                        String name = onlineAid.getTitle();
+                        if (name.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
+                            tempMap.put(indexKey, onlineAid);
+                            indexKey = indexKey + 1;
+                        }
                     }
+                    else{
+                        EUMarker euMarker = (EUMarker) currentMap.get(BookmarkType.OVERSEAS);
+                        String name = euMarker.getTitle();
+                        if (name.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
+                            tempMap.put(indexKey, euMarker);
+                            indexKey = indexKey + 1;
+                        }                    }
                 }
                 filterResults.count = tempMap.size();
                 filterResults.values = tempMap;

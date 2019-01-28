@@ -1,11 +1,10 @@
 package com.gb.istandwithrefugeesapp;
 
-import android.app.ActivityManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,16 +24,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.gb.istandwithrefugeesapp.Model.Bookmark;
 import com.gb.istandwithrefugeesapp.Model.BookmarkType;
 import com.gb.istandwithrefugeesapp.Model.Charity;
+import com.gb.istandwithrefugeesapp.Model.EUMarker;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
 import com.gb.istandwithrefugeesapp.Model.LatLong;
+import com.gb.istandwithrefugeesapp.Model.OnlineAid;
+import com.gb.istandwithrefugeesapp.Model.UkMarker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,58 +47,46 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
     private final MainActivity mainActivity;
     private final MainActivity.BookmarksFragment bkFrag;
 
-    private TreeMap<Integer, Object>  mDataset;
-    private final TreeMap<Integer, Object>  filterOrgsList;
-    private SparseArray filterLatLongsList;
+    private ArrayList<Bookmark> mDataset;
+    private final ArrayList<Bookmark> filterOrgsList;
     private String title;
 
     private int selectedMarkerId;
-    private String selectedTitle;
     private BookmarkType selectedBookmarkType;
+    private int bookmarkArrayIndex;
+    private Bookmark selectedBookmark;
 
-    public TreeMap getmDataset() {
+    public ArrayList<Bookmark> getmDataset() {
         return mDataset;
     }
 
+    public void setmDataset(ArrayList<Bookmark> mDataset) {
+        this.mDataset = mDataset;
+    }
 
     private AllFilter allFilter;
-    
+    private int selectedBookmarkId;
 
 
     //remove correct type of bookmark (uk online etc)
     @Override
     public void downloadResult() {
-        if (selectedBookmarkType.equals(BookmarkType.UK)){
-            downloadResultUk();
-        }
-        else if (selectedBookmarkType.equals(BookmarkType.OVERSEAS)){
-            downloadResultOverseas();
-        }
-        else{
-            downloadResultOnline();
-        }
+            removeBookmark();
     }
 
-    private void downloadResultOverseas() {
-    }
-
-    private void downloadResultOnline() {
-    }
-
-    private void downloadResultUk() {
-            removeBookmarkUk();
-    }
 
     @Override
     public void onViewRecycled(BookmarksListAdapter.ViewHolder holder) {
         super.onViewRecycled(holder);
-        Glide.with(mainActivity).clear(holder.logo);
-        Glide.with(mainActivity).clear(holder.locationImg);
-        Glide.with(mainActivity).clear(holder.dateImg);
-        Glide.with(mainActivity).clear(holder.timeImg);
-        Glide.with(mainActivity).clear(holder.webImage);
-        Glide.with(mainActivity).clear(holder.bookmarkImage);
-        Glide.with(mainActivity).clear(holder.mapImage);
+        if (!mainActivity.isFinishing()) {
+            Glide.with(mainActivity).clear(holder.logo);
+            Glide.with(mainActivity).clear(holder.locationImg);
+            Glide.with(mainActivity).clear(holder.dateImg);
+            Glide.with(mainActivity).clear(holder.timeImg);
+            Glide.with(mainActivity).clear(holder.webImage);
+            Glide.with(mainActivity).clear(holder.bookmarkImage);
+            Glide.with(mainActivity).clear(holder.mapImage);
+        }
     }
 
     // Provide a reference to the views for each data item
@@ -114,6 +102,8 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
         ImageView webImage;
         ImageView bookmarkImage;
         ImageView mapImage;
+        ImageView copyImage;
+
         ViewHolder(CardView v) {
             super(v);
             mCardView = v;
@@ -124,15 +114,15 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
             webImage = mCardView.findViewById(R.id.web_button);
             bookmarkImage = mCardView.findViewById(R.id.bookmarks_button);
             mapImage = mCardView.findViewById(R.id.map_button);
+            copyImage = mCardView.findViewById(R.id.copy_icon);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public BookmarksListAdapter(MainActivity anActivity, TreeMap<Integer, Object> myDataset, SparseArray latlongMap, MainActivity.BookmarksFragment bkFrag )  {
+    public BookmarksListAdapter(MainActivity anActivity, ArrayList<Bookmark> myDataset, MainActivity.BookmarksFragment bkFrag )  {
         mDataset = myDataset;
         mainActivity = anActivity;
         filterOrgsList = mDataset;
-        filterLatLongsList = latlongMap;
         this.bkFrag = bkFrag;
     }
 
@@ -151,7 +141,9 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        TreeMap currentMap = (TreeMap) mDataset.get(position + 1);
+        System.out.println(mDataset);
+        Bookmark bookmark = mDataset.get(position);
+        // TODO: 13/01/2019 maybe position + 1?
         final TextView textview = holder.mCardView.findViewById(R.id.ref_name);
         Typeface titleFont = Typeface.
                 createFromAsset(holder.mCardView.getContext().getAssets(), "fonts/Lobster_1.3.otf");
@@ -170,10 +162,20 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
                 .into(holder.mapImage);
         Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button_alt.png")
                 .into(holder.bookmarkImage);
+        Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/copy.png")
+                .into(holder.copyImage);
 
-
-        if (currentMap.containsKey(BookmarkType.UK)) {
-            HashMap currentUkMap = (HashMap)currentMap.get(BookmarkType.UK);
+        final TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
+        holder.copyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied address", textViewAddress.getText().toString());
+                clipboard.setPrimaryClip(clip);
+            }
+        });
+        if (bookmark.getBookmarkType() == BookmarkType.UK) {
+            HashMap currentUkMap = mainActivity.getDbHelper().getMarkersMap().get(bookmark.getMarkerId());
             final int markerId;
             if (currentUkMap.containsKey("Organisation")){
             RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
@@ -186,7 +188,6 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
             title = charity.getTitle();
                 Glide.with(mainActivity).load(charity.getImageUrl())
                         .into(holder.logo);
-            TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
                 String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
                 String street = charity.getStreet();
                 String otherAddress = charity.getOtherAddress();
@@ -217,7 +218,7 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
                 holder. mapImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LatLong l = (LatLong) filterLatLongsList.get(markerId);
+                        LatLong l = (LatLong) mainActivity.getDbHelper().getLongLatMap().get(markerId);
                         float lat = l.getLat();
                         float lon = l.getLon();
                         Fragment frag = new MainActivity.UkMapFragment();
@@ -239,7 +240,6 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
                 timeText.setText(fundraiser.getTime());
                 textview.setText(fundraiser.getTitle() + "\n" + "\n" + "For: " + fundraiser.getaCharity().getTitle());
                 title = fundraiser.getTitle();
-                TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
                 String houseNoOrBuldingName = fundraiser.getHouseNoOrBuldingName();
                 String street = fundraiser.getStreet();
                 String otherAddress = fundraiser.getOtherAddress();
@@ -270,7 +270,7 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
                 holder. mapImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LatLong l = (LatLong) filterLatLongsList.get(markerId);
+                        LatLong l = (LatLong) mainActivity.getDbHelper().getLongLatMap().get(markerId);
                         float lat = l.getLat();
                         float lon = l.getLon();
                         Fragment frag = new MainActivity.UkMapFragment();
@@ -282,34 +282,95 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
             holder.bookmarkImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectedBookmarkType = BookmarkType.UK;
-                    System.out.println(mDataset + "Yo");
-                    TreeMap currentMap = (TreeMap) mDataset.get(position + 1);
-                    HashMap currentUKMap = (HashMap) currentMap.get(BookmarkType.UK);
-                    if (currentUKMap.containsKey("Organisation")) {
-                        final Charity charity = (Charity) currentUKMap.get("Organisation");
-                        selectedMarkerId = charity.getMarkerId();
-                        selectedTitle = charity.getTitle() ;
-                    }
-                    else {
-                        final Fundraiser fundraiser = (Fundraiser) currentUKMap.get("Fundraiser");
-                        selectedMarkerId = fundraiser.getMarkerId();
-                        selectedTitle = fundraiser.getTitle() ;
-                    }
+                    Bookmark bookmark = mDataset.get(position);
+                    selectedBookmarkId = bookmark.getBookmarkId();
+                    selectedBookmark = bookmark;
                     mainActivity.checkDownloadPermissionsBookmarks(1, bookmarksListAdapter);
 
                 }
             });
         }
-        else if(currentMap.containsKey(BookmarkType.OVERSEAS)) {
-            //to do
-        }
-        else {
-            //to do
-        }
-}
+        else if(bookmark.getBookmarkType() == BookmarkType.ONLINE) {
+            final OnlineAid onlineAid = mainActivity.getDbHelper().getOnlineAids().get(bookmark.getMarkerId());
+                RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
+                relativeLayout.setBackgroundResource(R.drawable.rounded_edit_text_two);
+                RelativeLayout dateContainer = holder.mCardView.findViewById(R.id.date_container);
+                dateContainer.setVisibility(View.GONE);
+                textview.setText(onlineAid.getTitle());
+                title = onlineAid.getTitle();
+                Glide.with(mainActivity).load(onlineAid.getLogoUrl())
+                        .into(holder.logo);
+                textViewAddress.setVisibility(View.GONE);
+                TextView textViewDescription = holder.mCardView.findViewById(R.id.card_desc);
+                textViewDescription.setText(onlineAid.getDescription());
+                holder.webImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse(onlineAid.getWebsite());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        mainActivity.startActivity(intent);
+                    }
+                });
+                holder.mapImage.setVisibility(View.INVISIBLE);
+                holder.copyImage.setVisibility(View.GONE);
+                holder.locationImg.setVisibility(View.GONE);
+            holder.bookmarkImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bookmark bookmark = mDataset.get(position);
+                    selectedBookmarkId = bookmark.getBookmarkId();
+                    selectedBookmark = bookmark;
+                    mainActivity.checkDownloadPermissionsBookmarks(1, bookmarksListAdapter);
 
-    private void removeBookmarkUk() {
+                }
+            });        }
+        else {
+                final EUMarker currentMarker = mainActivity.getDbHelper().getOverseasMarkersMap().get(bookmark.getMarkerId());
+                final int markerId;
+                    RelativeLayout relativeLayout = holder.mCardView.findViewById(R.id.relativeLayout2);
+                    relativeLayout.setBackgroundResource(R.drawable.rounded_edit_text_two);
+                    RelativeLayout dateContainer = holder.mCardView.findViewById(R.id.date_container);
+                    dateContainer.setVisibility(View.GONE);
+                    markerId = currentMarker.getMarkerId();
+                    textview.setText(currentMarker.getTitle());
+                    title = currentMarker.getTitle();
+                    Glide.with(mainActivity).load(currentMarker.getImageUrl())
+                            .into(holder.logo);
+                    String cityOrTown = currentMarker.getCityOrTown();
+                    String region = currentMarker.getRegion();
+                    String country = currentMarker.getCountry();
+                    if (cityOrTown.length() != 0 && region.length() != 0) {
+                        cityOrTown = cityOrTown + ", ";
+                        region = cityOrTown + ", ";
+                        textViewAddress.setText(cityOrTown + region + country);
+                    }
+                    else{
+                textViewAddress.setText(country);
+                    }
+                    TextView textViewDescription = holder.mCardView.findViewById(R.id.card_desc);
+                    textViewDescription.setText(currentMarker.getDescription());
+                    holder.webImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Uri uri = Uri.parse(currentMarker.getWebsite());
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            mainActivity.startActivity(intent);
+                        }
+                    });
+                    holder. mapImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LatLong l = (LatLong) mainActivity.getDbHelper().getLongLatMapEU().get(markerId);
+                            float lat = l.getLat();
+                            float lon = l.getLon();
+                            Fragment frag = new MainActivity.EUMapFragment();
+                            loadFragment(frag, lat, lon);
+                        }
+                    });
+                }
+        }
+
+    private void removeBookmark() {
         class GetUserTy extends AsyncTask<Void, Void, Void> {
 
             @Override
@@ -319,34 +380,25 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
 
             @Override
             protected Void doInBackground(Void... params) {
-                mainActivity.getDbHelper().getBookmarksArray().remove(Integer.valueOf(selectedMarkerId));
-                mainActivity.getAllbookmarks();
+                System.out.println(selectedBookmark + "hey");
+                mainActivity.getDbHelper().getBookmarksArray().remove(selectedBookmark);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result) {
                 super.onPostExecute(result);
-                mDataset = mainActivity.getBookmarksMap();
+                mDataset = mainActivity.getDbHelper().getBookmarksArray();
                 bkFrag.setResults();
-                String toastMsg = selectedTitle + " bookmark removed.";
+                String toastMsg = title + " bookmark removed.";
                 Toast.makeText(mainActivity, toastMsg, Toast.LENGTH_SHORT).show();
-                mainActivity.getDbHelper().removeBookmark(selectedMarkerId);
+                mainActivity.getDbHelper().removeBookmark(selectedBookmarkId);
             }
         }
         GetUserTy gut = new GetUserTy();
         gut.execute();
     }
 
-
-
-    private void removeBookmarkOverseas() {
-        //TODO
-    }
-
-    private void removeBookmarkOnline() {
-        //TODO
-    }
 
 
         private void loadFragment(final Fragment fragment, float lat, float lon) {
@@ -384,94 +436,64 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            TreeMap<Integer, Object> filterAllList = filterOrgsList;
-            filterLatLongsList = mainActivity.getDbHelper().getLongLatMap();
-            SparseArray<LatLong> latLongSparseArray = new SparseArray<>();
-
+            ArrayList<Bookmark> filterAllList = filterOrgsList;
             FilterResults filterResults = new FilterResults();
+            ArrayList<Bookmark> tempArray = new ArrayList<>();
             if (mainActivity.getType()!=null) {
-                Set<Integer> keys;
-                TreeMap<Integer,Object> tempMap = new TreeMap<>();
-                keys = filterAllList.keySet();
-                int indexKey = 1;
-                for (int key: keys) {
-                    TreeMap currentMap = (TreeMap) filterAllList.get(key);
-                    if (currentMap.containsKey(mainActivity.getType())){
-                        tempMap.put(indexKey, currentMap);
-                        if (currentMap.containsKey(BookmarkType.UK)) {
-                            HashMap currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
-                            if (currentUkMap.containsKey("Organisation")) {
-                                Charity charity = (Charity) currentUkMap.get("Organisation");
-                                Integer markerId = charity.getMarkerId();
-                            LatLong latLong = (LatLong) filterLatLongsList.get(markerId);
-                            latLongSparseArray.put(markerId, latLong);
-                        }
-                        else {
-                                Fundraiser fundraiser = (Fundraiser) currentUkMap.get("Fundraiser");
-                                Integer markerId = fundraiser.getMarkerId();
-                                LatLong latLong = (LatLong) filterLatLongsList.get(markerId);
-                                latLongSparseArray.put(markerId, latLong);
-                            }
-                        }
-                            indexKey = indexKey + 1;
+                System.out.println(filterAllList);
+                for (int i = 0; i < filterAllList.size(); i++) {
+                    Bookmark bookmark = filterAllList.get(i);
+                    if (bookmark.getBookmarkType() == mainActivity.getType()){
+                        tempArray.add(bookmark);
                     }
                 }
-                filterResults.count = tempMap.size();
-                filterResults.values = tempMap;
-                filterLatLongsList = latLongSparseArray;
-
+                filterResults.count = tempArray.size();
+                filterResults.values = tempArray;
             }
             else {
                 filterResults.count = filterAllList.size();
                 filterResults.values = filterAllList;
             }
-            filterAllList = (TreeMap)filterResults.values;
+            filterAllList = (ArrayList<Bookmark>) filterResults.values;
 
             filterResults = new FilterResults();
+            tempArray = new ArrayList<>();
             if (mainActivity.getSearchString()!=null && mainActivity.getSearchString().length()>0) {
-                ArrayList<String> tempList = new ArrayList<>();
-                TreeMap<Integer, Object> tempMap = new TreeMap<>();
-                latLongSparseArray = new SparseArray<>();
+                String title = "";
+                int indexKey = 0;
+                for (int i = 0; i < filterAllList.size(); i++) {
+                    Bookmark bookmark = filterAllList.get(i);
 
-                Set<Integer> keys = filterAllList.keySet();
-                int indexKey = 1;
-                for (int key: keys) {
-                    TreeMap currentMap = (TreeMap) filterAllList.get(key);
-                    if (currentMap.containsKey(BookmarkType.UK)) {
-                        HashMap currentUkMap = (HashMap) currentMap.get(BookmarkType.UK);
-                        if (currentUkMap.containsKey("Organisation")) {
-                            Charity charity = (Charity) currentUkMap.get("Organisation");
-                            Integer markerId = charity.getMarkerId();
-                            String name = charity.getTitle();
-                            if (name.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
-                                tempMap.put(indexKey, currentMap);
-                                LatLong latLong = (LatLong) filterLatLongsList.get(markerId);
-                                latLongSparseArray.put(markerId, latLong);
-                                indexKey = indexKey + 1;
-                            }
-                        } else {
-                            Fundraiser fun = (Fundraiser) currentUkMap.get("Fundraiser");
-                            Integer markerId = fun.getMarkerId();
-                            String name = fun.getTitle() + " for: " + fun.getaCharity().getTitle();
-                            if (name.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
-                                tempMap.put(indexKey, currentMap);
-                                LatLong latLong = (LatLong) filterLatLongsList.get(markerId);
-                                latLongSparseArray.put(markerId, latLong);
-                                indexKey = indexKey + 1;
-                            }
+                    if (bookmark.getBookmarkType() == BookmarkType.UK) {
+                        HashMap<String, UkMarker> currentMap = mainActivity.getDbHelper().getMarkersMap().get(bookmark.getMarkerId());
+                        if (currentMap.containsKey("Organisation")) {
+                            Charity charity = (Charity) currentMap.get("Organisation");
+                            title = charity.getTitle();
                         }
-                    } else {
-                        //TODO overseas, online search}
+                        if (currentMap.containsKey("Fundraiser")) {
+                            Fundraiser fundraiser = (Fundraiser) currentMap.get("Fundraiser");
+                            title = fundraiser.getTitle();
+                        }
+                    } else if (bookmark.getBookmarkType() == BookmarkType.ONLINE) {
+                        OnlineAid onlineAid = mainActivity.getDbHelper().getOnlineAids().get(bookmark.getMarkerId());
+                        title = onlineAid.getTitle();
+                    }
+                    else  {
+                        EUMarker euMarker= mainActivity.getDbHelper().getOverseasMarkersMap().get(bookmark.getMarkerId());
+                        title = euMarker.getTitle();
+                    }
+                    if (title.toLowerCase().contains(mainActivity.getSearchString().toLowerCase())) {
+                        tempArray.add(bookmark);
                     }
                 }
-                filterResults.count = tempMap.size();
-                filterResults.values = tempMap;
-                filterLatLongsList = latLongSparseArray;
+                filterResults.count = tempArray.size();
+                filterResults.values = tempArray;
             }
             else {
                 filterResults.count = filterAllList.size();
                 filterResults.values = filterAllList;
             }
+
             return filterResults;
         }
 
@@ -484,8 +506,7 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
          */
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mDataset = (TreeMap) results.values;
-            System.out.println(filterLatLongsList);
+            mDataset = (ArrayList<Bookmark>) results.values;
             bkFrag.setResults();
 
         }

@@ -34,23 +34,23 @@
       </menu >
     </item>
     <item
-        android:title="@string/action_overseas">
+        android:title="Volunteer Overseas">
       <menu>
         <group android:checkableBehavior="single">
           <item
               android:id="@+id/item_find_overseas"
               android:icon="@drawable/search"
-              android:title="@string/find_overseas_menu"
+              android:title="Locate Overseas Orgs"
               />
           <item
               android:id="@+id/item_list_overseas"
               android:icon="@drawable/list_menu"
-              android:title="@string/list_overseas_menu"
+              android:title="List Voluntary Orgs"
               />
           <item
               android:id="@+id/item_add_overseas"
               android:icon="@drawable/add_org_menu"
-              android:title="@string/add_overseas_menu"
+              android:title="Add Voluntary Org"
               />
           <item
               android:id="@+id/item_other_resources"
@@ -99,5 +99,18 @@
       </group>
     </menu >
   </item>
+
+    <item
+        android:title="Contact">
+      <menu>
+        <group android:checkableBehavior="single">
+          <item
+              android:id="@+id/contact_item"
+              android:icon="@drawable/contributions"
+              android:title="Contact Us"
+              />
+        </group>
+      </menu >
+    </item>
   </group>
 </menu>

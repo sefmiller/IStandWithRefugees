@@ -39,7 +39,7 @@
                         android:id="@+id/overseastext1"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:text="@string/find_overseas"
+                        android:text="Locate Overseas Orgs"
                         android:gravity="center"
                         android:textSize="@dimen/_16ssp"
                         android:layout_marginTop="@dimen/_3sdp"
@@ -70,7 +70,7 @@
                         android:layout_centerHorizontal="true" />
                     <TextView
                         android:id="@+id/overseastext2"
-                        android:text="Add Org Overseas"
+                        android:text="Add Voluntary Org"
                         android:gravity="center"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                         android:id="@+id/overseastext3"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:text="@string/list_overseas"
+                        android:text="List Voluntary Orgs"
                         android:gravity="center"
                         android:textSize="@dimen/_16ssp"
                         android:layout_marginTop="@dimen/_3sdp"

@@ -1,5 +1,8 @@
 package com.gb.istandwithrefugeesapp;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -29,6 +32,8 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
+import com.gb.istandwithrefugeesapp.Model.Bookmark;
+import com.gb.istandwithrefugeesapp.Model.BookmarkType;
 import com.gb.istandwithrefugeesapp.Model.Charity;
 import com.gb.istandwithrefugeesapp.Model.Fundraiser;
 import com.gb.istandwithrefugeesapp.Model.LatLong;
@@ -57,6 +62,8 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
 
     private int selectedMarkerId;
     private String selectedTitle;
+    private int bookmarkId;
+    private Bookmark selectedBookmark;
 
     public SparseArray<HashMap<String,UkMarker>> getmDataset() {
         return mDataset;
@@ -70,10 +77,16 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
 
     @Override
     public void downloadResult() {
-        if (mainActivity.getDbHelper().getBookmarksArray().contains(selectedMarkerId)){
-            removeBookmark();
+        selectedBookmark = mainActivity.findBookmark(selectedMarkerId, BookmarkType.UK);
+        if (selectedBookmark != null) {
+            bookmarkId = selectedBookmark.getBookmarkId();
         }
-        else{
+        else {
+            bookmarkId = 0;
+        }
+            if (bookmarkId != 0) {
+            removeBookmark();
+        } else {
             addBookmark();
         }
     }
@@ -105,6 +118,8 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
         ImageView webImage;
         ImageView bookmarkImage;
         ImageView mapImage;
+        ImageView copyImage;
+
 
         ViewHolder(CardView v) {
             super(v);
@@ -116,9 +131,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             webImage = mCardView.findViewById(R.id.web_button);
             bookmarkImage = mCardView.findViewById(R.id.bookmarks_button);
             mapImage = mCardView.findViewById(R.id.map_button);
-
-
-
+            copyImage = mCardView.findViewById(R.id.copy_icon);
         }
     }
 
@@ -130,6 +143,7 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
         filterOrgsList = mDataset;
         filterLatLongsList = latlongMap;
         this.listMarkersFrag = listMarkersFrag;
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -164,6 +178,18 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 .into(holder.webImage);
         Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_button.png")
                 .into(holder.mapImage);
+        Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/copy.png")
+                .into(holder.copyImage);
+
+        final TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
+        holder.copyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied address", textViewAddress.getText().toString());
+                clipboard.setPrimaryClip(clip);
+            }
+        });
         //System.out.println(position);
         int markerId;
         if (currentMap.containsKey("Organisation")) {
@@ -179,7 +205,6 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                     .signature(new ObjectKey(charity.getLastModified()))
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                     .into(holder.logo);
-            TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
             String houseNoOrBuldingName = charity.getHouseNoOrBuldingName();
             String street = charity.getStreet();
             String otherAddress = charity.getOtherAddress();
@@ -223,7 +248,6 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
             timeText.setText(fundraiser.getTime());
             textview.setText(fundraiser.getTitle() + "\n" + "\n" + "For: " + fundraiser.getaCharity().getTitle());
             title = fundraiser.getTitle();
-            TextView textViewAddress = holder.mCardView.findViewById(R.id.address);
             String houseNoOrBuldingName = fundraiser.getHouseNoOrBuldingName();
             String street = fundraiser.getStreet();
             String otherAddress = fundraiser.getOtherAddress();
@@ -256,10 +280,13 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
                 }
             });
         }
-        if(mainActivity.getDbHelper().getBookmarksArray().contains(markerId)){
+        selectedBookmark = mainActivity.findBookmark(markerId, BookmarkType.UK);
+        if (selectedBookmark != null) {
+            bookmarkId = selectedBookmark.getBookmarkId();
             Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button_alt.png")
                     .into(holder.bookmarkImage);        }
         else{
+            bookmarkId = 0;
             Glide.with(mainActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/bookmarks_button.png")
                     .into(holder.bookmarkImage);
                    }
@@ -296,23 +323,21 @@ class UkListAdapter extends RecyclerView.Adapter<UkListAdapter.ViewHolder> imple
 
         }
     });
+
 }
 
     private void removeBookmark() {
         String toastMsg = selectedTitle + " bookmark removed.";
         Toast.makeText(mainActivity, toastMsg, Toast.LENGTH_SHORT).show();
-        mainActivity.getDbHelper().getBookmarksArray().remove(Integer.valueOf(selectedMarkerId));
+        mainActivity.getDbHelper().getBookmarksArray().remove(selectedBookmark);
         listMarkersFrag.setResults();
-        mainActivity.getDbHelper().removeBookmark(selectedMarkerId);
-
+        mainActivity.getDbHelper().removeBookmark(bookmarkId);
     }
 
     private void addBookmark() {
         String toastMsg = selectedTitle + " bookmarked.";
         Toast.makeText(mainActivity, toastMsg, Toast.LENGTH_SHORT).show();
-        mainActivity.getDbHelper().getBookmarksArray().add(selectedMarkerId);
-        listMarkersFrag.setResults();
-        mainActivity.getDbHelper().addBookmark(selectedMarkerId);
+        mainActivity.getDbHelper().addBookmark(selectedMarkerId, BookmarkType.UK, listMarkersFrag);
     }
 
     private void loadFragment(final Fragment fragment, float lat, float lon) {

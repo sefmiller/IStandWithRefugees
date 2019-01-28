@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="@dimen/_220sdp"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/listTitle"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textColor="@android:color/white"
+        android:paddingTop="@dimen/_7sdp"
+        android:textSize="@dimen/_14ssp"
+        android:text="oy"
+        android:paddingBottom="@dimen/_7sdp" />
+
+    <CheckBox
+        android:id="@+id/country_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/listTitle"
+        android:checked="true" />
+</RelativeLayout>

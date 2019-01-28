@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_2sdp"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter_layout"
+        android:background="@drawable/bottomborder_gold">
+
+        <android.support.v7.widget.SearchView
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/search_list"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/rounded_edit_text_nine"
+
+
+            />
+
+        <TextView
+            android:id="@+id/results"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_list"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_online_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
+        android:scrollbarSize="@dimen/_10sdp"
+        android:layout_below="@+id/filter_layout"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    >
+
+    <ImageView
+        android:id="@+id/copy_icon2"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@+id/textviewtitle3"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp" />
+
+    <TextView
+        android:id="@+id/textviewtitle2"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewtitle"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:text="If you have any enquiries regarding the application, please contact us using the below address."
+        android:textColor="@color/secondaryColor"
+        android:textSize="@dimen/_22ssp" />
+
+    <TextView
+        android:id="@+id/textviewtitle3"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewtitle2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:autoLink="email"
+        android:textStyle="bold"
+        android:text="iswrefugees@gmail.com"
+        android:textSize="@dimen/_16ssp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_below="@+id/textviewtitle"
+        android:layout_alignLeft="@+id/textviewtitle"
+        ></LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        >
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

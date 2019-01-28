@@ -188,6 +188,12 @@ public class SplashScreenActivity extends AppCompatActivity implements View.OnCl
         ((MyAppApplication) this.getApplication()).setLongLatMap(dbHelper.getLongLatMap());
         ((MyAppApplication) this.getApplication()).setMarkersMap(dbHelper.getMarkersMap());
         ((MyAppApplication) this.getApplication()).setLogoUrls(dbHelper.getLogoUrls());
+        ((MyAppApplication) this.getApplication()).setOnlineAids(dbHelper.getOnlineAids());
+        ((MyAppApplication) this.getApplication()).setLogoUrlsOnline(dbHelper.getLogoUrlsOnline());
+        ((MyAppApplication) this.getApplication()).setOverseasMarkersMap(dbHelper.getOverseasMarkersMap());
+        ((MyAppApplication) this.getApplication()).setLogoUrlsOverseas(dbHelper.getLogoUrlsOverseas());
+        ((MyAppApplication) this.getApplication()).setLongLatMapEU(dbHelper.getLongLatMapEU());
+        ((MyAppApplication) this.getApplication()).setCountryAndRegionsArray(dbHelper.getCountryAndRegionsArray());
 
         Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
         startActivity(intent);

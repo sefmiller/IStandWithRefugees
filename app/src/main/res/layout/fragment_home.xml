@@ -70,7 +70,7 @@
                                     android:layout_centerHorizontal="true" />
                                 <TextView
                                     android:id="@+id/uktext2"
-                                    android:text="@string/action_overseas"
+                                    android:text="Volunteer Overseas"
                                     android:gravity="center"
                                     android:layout_marginTop="@dimen/_3sdp"
                                     android:textSize="@dimen/_16ssp"
