@@ -236,7 +236,8 @@ class EUListAdapter extends RecyclerView.Adapter<EUListAdapter.ViewHolder> imple
         holder.bookmarkImage.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v) {
-                title = euMarker.getTitle();
+                selectedTitle = euMarker.getTitle();
+                selectedMarkerId = euMarker.getMarkerId();
                 mainActivity.checkDownloadPermissionsSelected(5, euListAdapter);
             }
         });

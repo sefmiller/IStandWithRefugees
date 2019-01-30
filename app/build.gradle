@@ -6,9 +6,9 @@ android {
         applicationId "com.gb.istandwithrefugees"
         minSdkVersion 16
         targetSdkVersion 27
-        versionName '2'
+        versionName 'final'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 4
+        versionCode 6
     }
     buildTypes {
         release {

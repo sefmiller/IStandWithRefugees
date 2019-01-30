@@ -959,8 +959,8 @@
                         fragment1.setResults();
                     }
                     else{
-                        //overseas
-                    }
+                        MainActivity.ListEuropeFragment fragment1 = (MainActivity.ListEuropeFragment) fragment;
+                        fragment1.setResults();                    }
                     super.onPostExecute(s);
 
                 }

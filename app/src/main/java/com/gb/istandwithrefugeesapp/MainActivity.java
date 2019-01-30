@@ -5247,7 +5247,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
                    View view = inflater.inflate(R.layout.list_online_fragment, viewGroup, false);
                    anActivity = (MainActivity) getActivity();
                    assert anActivity != null;
-                   anActivity.getmTitle().setText(R.string.list_orgs);
+                   anActivity.getmTitle().setText("List Action Online");
                    recyclerView = view.findViewById(R.id.list_online_recycler_view);
                    anActivity.getSupportActionBar().show();
                    layoutManager = new LinearLayoutManager(getContext());

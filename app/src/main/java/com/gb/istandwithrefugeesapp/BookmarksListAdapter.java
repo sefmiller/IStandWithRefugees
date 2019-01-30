@@ -367,6 +367,15 @@ class BookmarksListAdapter extends RecyclerView.Adapter<BookmarksListAdapter.Vie
                             loadFragment(frag, lat, lon);
                         }
                     });
+            holder.bookmarkImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bookmark bookmark = mDataset.get(position);
+                    selectedBookmarkId = bookmark.getBookmarkId();
+                    selectedBookmark = bookmark;
+                    mainActivity.checkDownloadPermissionsBookmarks(1, bookmarksListAdapter);
+                }
+            });
                 }
         }
 
