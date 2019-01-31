@@ -648,6 +648,7 @@
                         splashScreenActivity.getProgressDialog().dismiss();
                         if (splashScreenActivity != null) {
                             splashScreenActivity.loadMainActivity();
+                            System.out.println("done");
                             splashScreenActivity = null;
                         }
                     }
@@ -660,11 +661,12 @@
 
         public void preloadLogos() {
             splashScreenActivity.getProgressDialog().dismiss();
-            final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("Loading App Data for the first time. Please wait a moment");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            //final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
+            splashScreenActivity.setProgressDialog(new ProgressDialog(splashScreenActivity));
+            splashScreenActivity.getProgressDialog().setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            splashScreenActivity.getProgressDialog().setMessage("Loading App Data for the first time. Please wait a moment");
+            splashScreenActivity.getProgressDialog().setCanceledOnTouchOutside(false);
+            splashScreenActivity.getProgressDialog().show();
             int dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._30sdp);
             Glide.with(splashScreenActivity).load("https://s3.amazonaws.com/istandwithrefugees-userfiles-mobilehub-1734667399/public/map_google_icon.png")
                     .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
@@ -755,20 +757,23 @@
             SharedPreferences.Editor tutorialShowcasesEdit = sharedPreferences.edit();
             tutorialShowcasesEdit.putBoolean("areAppImagesPreloaded", false);
             tutorialShowcasesEdit.apply();
-            progressDialog.dismiss();
-                preloadUkLogos();
+            splashScreenActivity.getProgressDialog().dismiss();
+            System.out.println("1");
+            preloadUkLogos();
             }
 
 
         public void preloadUkLogos() {
+            in = 0;
             splashScreenActivity.getProgressDialog().dismiss();
-            final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMessage("Loading Uk Organisations for the first time. Please wait a moment");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setMax(logoUrls.size());
-            progressDialog.show();
-            System.out.println("Yo");
+            splashScreenActivity.setProgressDialog(new ProgressDialog(splashScreenActivity));
+            //final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
+            splashScreenActivity.getProgressDialog().setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            splashScreenActivity.getProgressDialog().setMessage("Loading Uk Organisations for the first time. Please wait a moment");
+            splashScreenActivity.getProgressDialog().setCanceledOnTouchOutside(false);
+            splashScreenActivity.getProgressDialog().setMax(logoUrls.size());
+            splashScreenActivity.getProgressDialog().show();
+            final Boolean[] result = {false};
             for (int i = 0; i < logoUrls.size(); i++) {
                 int dimen;
                 dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
@@ -786,14 +791,17 @@
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 in = in + 1;
-                                progressDialog.setProgress(in);
-                                System.out.println(in);
-                                if (in > logoUrls.size() - 20) {
+                                if(result[0] == false){
+                                    splashScreenActivity.getProgressDialog().setProgress(in);
+
+                                }                                if (in > logoUrls.size() - 20 && result[0] == false) {
                                     SharedPreferences.Editor tutorialShowcasesEdit = sharedPreferences.edit();
                                     tutorialShowcasesEdit.putBoolean("areImagesPreloaded", false);
                                     tutorialShowcasesEdit.apply();
-                                    progressDialog.dismiss();
-                                        preloadOnlineLogos();
+                                    result[0] = true;
+                                    splashScreenActivity.getProgressDialog().dismiss();
+                                    System.out.println("2");
+                                    preloadOnlineLogos();
                                 }
                                 return false;
                             }
@@ -803,14 +811,16 @@
         }
 
         public void preloadOnlineLogos(){
+            in = 0;
             splashScreenActivity.getProgressDialog().dismiss();
-            final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMessage("Loading Online Organisations for the first time. Please wait a moment");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setMax(logoUrlsOnline.size());
-            progressDialog.show();
-            System.out.println("Yo");
+            splashScreenActivity.setProgressDialog(new ProgressDialog(splashScreenActivity));
+            //final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
+            splashScreenActivity.getProgressDialog().setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            splashScreenActivity.getProgressDialog().setMessage("Loading Online Organisations for the first time. Please wait a moment");
+            splashScreenActivity.getProgressDialog().setCanceledOnTouchOutside(false);
+            splashScreenActivity.getProgressDialog().setMax(logoUrlsOnline.size());
+            splashScreenActivity.getProgressDialog().show();
+            final Boolean[] result = {false};
             for (int i = 0; i < logoUrlsOnline.size(); i++) {
                 int dimen;
                 dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
@@ -827,13 +837,18 @@
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 in = in + 1;
-                                progressDialog.setProgress(in);
-                                if (in > logoUrlsOnline.size() - 2) {
+                                if(result[0] == false){
+                                    splashScreenActivity.getProgressDialog().setProgress(in);
+
+                                }
+                                if (in > logoUrlsOnline.size() - 2 && result[0] == false) {
                                     SharedPreferences.Editor tutorialShowcasesEdit = sharedPreferences.edit();
                                     tutorialShowcasesEdit.putBoolean("areOnlineImagesPreloaded", false);
                                     tutorialShowcasesEdit.apply();
-                                    progressDialog.dismiss();
-                                        preloadOverseasLogos();
+                                    result[0] = true;
+                                    splashScreenActivity.getProgressDialog().dismiss();
+                                    System.out.println("3");
+                                    preloadOverseasLogos();
                                     }
                                 return false;
                             }
@@ -843,14 +858,16 @@
             }
 
         public void preloadOverseasLogos(){
+            in = 0;
             splashScreenActivity.getProgressDialog().dismiss();
-            final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMessage("Loading Overseas Organisations for the first time. Please wait a moment");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setMax(logoUrlsEU.size());
-            progressDialog.show();
-            System.out.println("Yo");
+            splashScreenActivity.setProgressDialog(new ProgressDialog(splashScreenActivity));
+            //final ProgressDialog progressDialog = new ProgressDialog(splashScreenActivity);
+            splashScreenActivity.getProgressDialog().setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            splashScreenActivity.getProgressDialog().setMessage("Loading Overseas Organisations for the first time. Please wait a moment");
+            splashScreenActivity.getProgressDialog().setCanceledOnTouchOutside(false);
+            final Boolean[] result = {false};
+            splashScreenActivity.getProgressDialog().setMax(logoUrlsEU.size());
+            splashScreenActivity.getProgressDialog().show();
             for (int i = 0; i < logoUrlsEU.size(); i++) {
                 int dimen;
                 dimen = (int) splashScreenActivity.getResources().getDimensionPixelSize(R.dimen._50sdp);
@@ -867,15 +884,18 @@
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 in = in + 1;
-                                progressDialog.setProgress(in);
-                                if (in > logoUrlsEU.size() - 20) {
+                                if(result[0] == false){
+                                    splashScreenActivity.getProgressDialog().setProgress(in);
+
+                                }                                if (in > logoUrlsEU.size() - 20 && result[0] == false) {
                                     System.out.println("here");
+                                    result[0] = true;
                                     SharedPreferences.Editor tutorialShowcasesEdit = sharedPreferences.edit();
                                     tutorialShowcasesEdit.putBoolean("areOverseasImagesPreloaded", false);
                                     tutorialShowcasesEdit.apply();
-                                    progressDialog.dismiss();
+
+                                    System.out.println("4");
                                     if (splashScreenActivity != null) {
-                                        System.out.println("NOOOOOOO");
                                         splashScreenActivity.loadMainActivity();
                                         splashScreenActivity = null;
                                     }
